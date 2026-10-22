@@ -1006,7 +1006,7 @@ function onHeader(){
 let hq=false; const qHeader=()=>{ if(hq) return; hq=true; requestAnimationFrame(()=>{ hq=false; onHeader(); }); };
 addEventListener('scroll',qHeader,{passive:true}); addEventListener('resize',qHeader); onHeader();
 /* Paste links here and the closing section shows a button for each; empty links stay hidden */
-const LINKS={ prototype:'https://www.figma.com/proto/BiZ3TffBXTSHCCWhZDNHqG/td?node-id=325-7701&scaling=scale-down&content-scaling=fixed&starting-point-node-id=325%3A7701&show-proto-sidebar=1&page-id=188%3A4236', caseStudy:'https://www.figma.com/design/BiZ3TffBXTSHCCWhZDNHqG/td?node-id=326-10874' };
+const LINKS={ prototype:'https://www.figma.com/proto/BiZ3TffBXTSHCCWhZDNHqG/td?node-id=325-7701&scaling=scale-down&content-scaling=fixed&starting-point-node-id=325%3A7701&show-proto-sidebar=1&page-id=188%3A4236', caseStudy:'https://www.behance.net/gallery/257452749/Easy-Laundry-iOS-App-Website-UXUI-Case-Study' };
 document.querySelectorAll('[data-link]').forEach(a=>{ const u=LINKS[a.dataset.link]; if(u){ a.href=u; a.target='_blank'; a.rel='noopener'; a.hidden=false; } });
 const menuBtn=document.getElementById('menuBtn'), sheet=document.getElementById('menuSheet');
 function setMenu(open){ sheet.classList.toggle('open',open); menuBtn.setAttribute('aria-expanded',open); menuBtn.setAttribute('aria-label',open?'Close menu':'Open menu'); }
