@@ -1,0 +1,1222 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Easy Laundry — laundry, booked in one sentence</title>
+<meta name="description" content="Easy Laundry is a concept app for doorstep laundry. Tell Bubbles what needs cleaning and get a price before you book. Designed by Om Mangrulkar.">
+<meta name="theme-color" content="#0F6F6D">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='28' fill='%23F8F3EA'/%3E%3Cg transform='translate%286 4%29 scale%28.9%29'%3E%3Cpath d='M51 18 C51 10 56 5 62.5 5 C69 5 73.5 9.5 73.5 15.5 C73.5 21.5 68.5 24 64.5 26.5 C62.5 28 61.5 29.5 61.5 31.5' stroke='%230F6F6D' stroke-width='6.5' fill='none' stroke-linecap='round'/%3E%3Cpath d='M61.5 31 L92 42 C101 45 108 52 110 60 L98 68 L90 63 L90 70 C72 60 50 66 30 82 L30 63 L22 68 L10 60 C12 52 19 45 28 42 Z' fill='%230F6F6D'/%3E%3Cpath d='M90 70 C72 60 50 66 30 82 C23 88 16 97 12 106 C32 92 54 86 74 92 C83 95 90 91 90 84 Z' fill='%231F9C8F'/%3E%3Cpath d='M90 84 C90 91 83 95 74 92 C54 86 32 92 12 106 C30 113 52 117 70 113 C84 110 92 101 90 84 Z' fill='%23BFE7E3'/%3E%3C/g%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Easy Laundry — laundry, booked in one sentence">
+<meta property="og:description" content="Easy Laundry is a concept app for doorstep laundry. Tell Bubbles what needs cleaning and get a price before you book. Designed by Om Mangrulkar.">
+<meta property="og:url" content="https://ommangrulkar15.github.io/easy-laundry/">
+<meta property="og:image" content="https://ommangrulkar15.github.io/easy-laundry/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ tokens ============ */
+:root{
+  color-scheme: light;
+  --coral:#E66E64;--coral-ink:#A63D2B;--coral-soft:#FCE4DD;--deep:#0F6F6D; --fresh:#1F9C8F; --aqua:#BFE7E3; --mint:#E4F2F0; --cream:#F8F3EA;
+  --sand:#E9D8CD; --ink:#2D2D2D; --teal:#0F6E70; --muted:#5B6168; --dim:#6E7672;
+  --room:#0F6F6D; --room2:#0F6F6D; --on-dark:#F8F3EA; --on-dark-2:#DCEDEA;
+  --gut:max(20px, env(safe-area-inset-left)); --gutr:max(20px, env(safe-area-inset-right));
+  --serif:"Crimson Text", Georgia, serif; --sans:Inter, system-ui, -apple-system, sans-serif;
+  --h2:clamp(32px, 2.2vw + 18px, 56px);
+  --sec:clamp(72px, 7vw, 128px);
+  --max:1200px;
+}
+@media (min-width:1600px){ :root{ --max:1360px; } }
+@media (min-width:600px){ :root{ --gut:max(32px, env(safe-area-inset-left)); --gutr:max(32px, env(safe-area-inset-right)); } }
+@media (min-width:1024px){ :root{ --gut:max(48px, env(safe-area-inset-left)); --gutr:max(48px, env(safe-area-inset-right)); } }
+
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.06;margin:0;letter-spacing:-.012em}
+p{margin:0}
+a{color:inherit}
+button{font:inherit;cursor:pointer;color:inherit}
+:focus-visible{outline:3px solid var(--fresh);outline-offset:3px;border-radius:8px}
+.wrap{max-width:calc(var(--max) + var(--gut) + var(--gutr));margin:0 auto;padding-left:var(--gut);padding-right:var(--gutr)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:0;border-radius:999px;padding:14px 24px;min-height:48px;font-weight:600;font-size:16px;text-decoration:none;transition:transform .2s, background .2s, box-shadow .2s}
+.btn:active{transform:scale(.97)}
+.btn svg{transition:transform .25s}
+.btn:hover svg{transform:translateY(2px)}
+.btn-light{background:var(--aqua);color:#0b2f2e}
+.btn-light:hover{background:#d4f0ec}
+.btn-line{color:var(--on-dark);box-shadow:inset 0 0 0 1.5px rgba(248,243,234,.38)}
+.btn-line:hover{box-shadow:inset 0 0 0 1.5px rgba(248,243,234,.85)}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:15px;font-weight:600;color:var(--teal)}
+.eyebrow svg{width:26px;height:26px;flex:none}
+h2.sec-title{font-size:var(--h2);color:var(--deep)}
+
+/* ============ header ============ */
+header.top{position:fixed;inset:0 0 auto 0;z-index:60;transition:background .3s, box-shadow .3s;color:var(--ink)}
+header.top.solid{background:rgba(248,243,234,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(15,111,109,.1)}
+header.top.dark{color:var(--on-dark)}
+header.top.dark.solid{background:rgba(15,111,109,.94);box-shadow:0 1px 0 rgba(255,255,255,.06)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand svg{width:34px;height:34px}
+.bar-r{display:flex;align-items:center;gap:28px}
+.app-btn{display:inline-flex;align-items:center;min-height:40px;padding:0 18px;border-radius:999px;background:var(--deep);color:#fff;font-size:14.5px;font-weight:600;text-decoration:none;white-space:nowrap;transition:background .2s, transform .15s}
+.app-btn:hover{background:var(--teal)}
+.app-btn:active{transform:scale(.97)}
+header.top.dark .app-btn{background:var(--aqua);color:#0b2f2e}
+header.top.dark .app-btn:hover{background:#d4f0ec}
+@media (max-width:899px){ .bar-r{gap:6px} .app-btn{min-height:38px;padding:0 14px;font-size:14px} }
+@media (max-width:359px){ .bar-r .app-btn{display:none} }
+@media (max-width:389px){ .app-btn{padding:0 11px;font-size:13.5px} .brand-word{font-size:20px} .brand svg{width:30px;height:30px} .brand{gap:8px} }
+.brand-word{white-space:nowrap}
+.toast{position:fixed;left:50%;bottom:max(20px,env(safe-area-inset-bottom));z-index:80;transform:translate(-50%,16px);opacity:0;visibility:hidden;background:var(--room);color:var(--on-dark);padding:12px 18px;border-radius:14px;font-size:15px;box-shadow:0 18px 40px -16px rgba(0,0,0,.55);transition:opacity .25s, transform .25s, visibility .25s;width:max-content;max-width:calc(100vw - 32px);text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0);visibility:visible}
+.brand-word{font-family:var(--serif);font-weight:700;font-size:23px;color:var(--deep)}
+.brand-word b{color:var(--fresh);font-weight:700}
+header.top.dark .brand-word{color:var(--on-dark)}
+header.top.dark .brand-word b{color:var(--aqua)}
+nav.links{display:flex;gap:28px}
+nav.links a{text-decoration:none;font-size:15px;font-weight:500;opacity:.85;position:relative;padding:6px 0}
+nav.links a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;border-radius:2px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .25s}
+nav.links a:hover{opacity:1}
+nav.links a:hover::after{transform:scaleX(1)}
+.menu-btn{display:none;border:0;background:transparent;width:44px;height:44px;border-radius:12px;align-items:center;justify-content:center;margin-right:-8px}
+.menu-btn svg{width:24px;height:24px}
+.menu-sheet{display:none}
+@media (max-width:899px){
+  nav.links{display:none}
+  .menu-btn{display:inline-flex}
+  .menu-sheet{display:block;position:fixed;left:12px;right:12px;top:72px;z-index:59;background:#fff;color:var(--ink);border-radius:20px;padding:8px;box-shadow:0 24px 60px -20px rgba(0,0,0,.4);transform:translateY(-8px);opacity:0;visibility:hidden;transition:opacity .2s, transform .2s, visibility .2s}
+  .menu-sheet.open{opacity:1;transform:none;visibility:visible}
+  .menu-sheet a{display:block;padding:14px 16px;border-radius:12px;text-decoration:none;font-weight:600;font-size:17px}
+  .menu-sheet a:hover{background:var(--mint)}
+}
+
+/* ============ hero ============ */
+#hero{position:relative;background:var(--room);color:var(--on-dark);overflow:hidden}
+.hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(32px,5vw,72px);align-items:center;min-height:100vh;min-height:100svh;padding-top:116px;padding-bottom:72px}
+.hero-copy{max-width:600px}
+.hero-copy h1{font-size:clamp(44px, min(5vw, 9.4vh), 86px);text-wrap:balance}
+.hero-copy h1 em{font-style:normal;color:var(--aqua);white-space:nowrap}
+.hero-copy p.sub{margin-top:22px;font-size:clamp(17px,1.25vw,20px);line-height:1.62;color:var(--on-dark-2);max-width:480px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.perks{list-style:none;margin:26px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:14.5px;color:var(--on-dark-2)}
+.perks li{display:flex;align-items:center;gap:8px}
+.perks svg{width:18px;height:18px;color:var(--aqua)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+[hidden]{display:none!important}
+
+/* the one authored moment: a sentence becomes a booking */
+.demo{--out:cubic-bezier(.16,1,.3,1);position:relative;justify-self:center;width:min(100%,560px);padding-left:132px;margin:0}
+.demo-bub{position:absolute;left:0;bottom:-10px;height:230px;width:auto;max-width:none;z-index:2;filter:drop-shadow(6px 10px 14px rgba(0,0,0,.35))}
+.demo-card{position:relative;z-index:1;background:var(--cream);color:var(--ink);border-radius:24px;padding:18px 18px 14px;box-shadow:0 34px 60px -30px rgba(0,0,0,.7)}
+.dc-head{display:flex;align-items:center;gap:10px;padding:0 2px 10px;border-bottom:1px solid rgba(15,111,109,.12)}
+.dc-head img{width:40px;height:40px;border-radius:50%;background:var(--mint);object-fit:cover;object-position:50% 10%}
+.dc-head b{font-family:var(--serif);font-size:20px;color:var(--deep);display:block;line-height:1.1}
+.dc-head small{font-size:13px;color:var(--muted)}
+.dc-body{display:flex;flex-direction:column;gap:10px;padding-top:12px}
+.d-me{align-self:flex-end;max-width:90%;min-height:44px;background:var(--deep);color:#fff;padding:10px 14px;border-radius:18px 18px 6px 18px;font-size:15.5px;line-height:1.45}
+.caret{display:none;width:2px;height:1.05em;background:currentColor;margin-left:2px;vertical-align:-2px;animation:blink 1s steps(1) infinite}
+.demo.typing-now .caret{display:inline-block}
+@keyframes blink{50%{opacity:0}}
+.d-dots{display:none;align-self:flex-start;gap:4px;padding:14px 16px;background:#fff;border-radius:18px 18px 18px 6px;box-shadow:0 0 0 1px rgba(15,111,109,.1)}
+.d-dots i{width:7px;height:7px;border-radius:50%;background:var(--fresh);animation:dot 1s infinite}
+.d-dots i:nth-child(2){animation-delay:.15s}.d-dots i:nth-child(3){animation-delay:.3s}
+.demo.think .d-dots{display:inline-flex}
+.d-book{background:#fff;border-radius:18px 18px 18px 6px;padding:14px 16px 12px;box-shadow:0 0 0 1px rgba(15,111,109,.1)}
+.d-say{font-size:15px;line-height:1.45}
+.d-book dl{margin:8px 0 0}
+.d-book dl div{display:flex;justify-content:space-between;gap:16px;padding:7px 0;border-top:1px solid #efece6;font-size:14.5px}
+.d-book dt{color:var(--muted)}
+.d-book dd{margin:0;font-weight:600;text-align:right}
+.d-total{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding-top:10px;border-top:1px solid #e3ded4;font-weight:600}
+.d-total b{font-family:var(--serif);font-size:36px;color:var(--deep);line-height:1;font-variant-numeric:tabular-nums}
+.d-fine{display:block;font-size:13px;color:var(--muted);margin-top:4px;font-variant-numeric:tabular-nums}
+.d-foot{display:flex;justify-content:flex-end;padding-top:8px}
+.d-replay{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border:0;border-radius:999px;background:transparent;color:var(--deep);font-size:14.5px;font-weight:600}
+.d-replay:hover{background:var(--mint)}
+.d-replay[disabled]{opacity:.4;cursor:default;background:transparent}
+.d-replay svg{width:16px;height:16px}
+.demo .rv{transition:opacity .55s var(--out), transform .55s var(--out);transition-delay:calc(var(--i,0) * 110ms)}
+.demo.hide .rv{opacity:0;transform:translateY(10px);transition:none}
+.demo .d-book{transition:opacity .35s var(--out), transform .35s var(--out)}
+.demo.hide .d-book{opacity:0;transform:translateY(6px);transition:none}
+@media (max-width:1023px){
+  .hero-grid{grid-template-columns:minmax(0,1fr);min-height:0;padding-top:104px;gap:56px;padding-bottom:64px}
+  .hero-copy h1{font-size:clamp(40px, 7.4vw, 72px)}
+  .demo{justify-self:start;width:min(100%,560px)}
+}
+@media (max-width:599px){
+  .hero-grid{padding-top:96px;gap:120px}
+  .hero-copy h1{font-size:clamp(38px, 11vw, 52px)}
+  .hero-copy p.sub{font-size:16.5px;margin-top:14px}
+  .cta-row{margin-top:22px;flex-wrap:nowrap;gap:10px}
+  .cta-row .btn{flex:1 1 0;padding:13px 10px;font-size:15px;white-space:nowrap}
+  .cta-row .btn svg{display:none}
+  .perks{margin-top:18px;gap:6px 14px;font-size:13.5px}
+  .demo{padding-left:0;width:100%}
+  .demo-bub{left:auto;right:6px;bottom:auto;top:-112px;height:124px;z-index:0}
+  .d-book dl div{font-size:14px}
+}
+
+/* ============ journey ============ */
+#hero{z-index:1}
+#journey{background:var(--cream);position:relative;z-index:2}
+main > section:not(#hero), footer{position:relative;z-index:2}
+.j-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center;padding-top:var(--sec);padding-bottom:var(--sec)}
+.j-left h2{margin-top:0;max-width:540px}
+ol.steps{list-style:none;margin:32px 0 0;padding:0;max-width:500px}
+ol.steps li{border-top:1px solid rgba(15,111,109,.16)}
+ol.steps li:last-child{border-bottom:1px solid rgba(15,111,109,.16)}
+.step-btn{all:unset;box-sizing:border-box;display:grid;grid-template-columns:52px 1fr;align-items:center;width:100%;padding:12px 0;cursor:pointer;min-height:56px}
+.step-btn:focus-visible{outline:3px solid var(--fresh);outline-offset:2px;border-radius:6px}
+.step-art{width:40px;height:40px;border-radius:12px;background:var(--mint);display:flex;align-items:center;justify-content:center;overflow:hidden;transition:background .3s;flex:none}
+.step-art{color:var(--deep)}
+.step-art svg{width:22px;height:22px}
+.step-art img{width:100%;height:100%;object-fit:cover;object-position:50% 12%}
+.step-btn .t{font-family:var(--serif);font-size:24px;font-weight:700;color:var(--dim);transition:color .3s;line-height:1.2}
+.step-btn .t small{display:block;font-family:var(--sans);font-size:13px;font-weight:600;color:var(--teal);letter-spacing:.02em}
+.step-btn:hover .t{color:var(--ink)}
+.step .d{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s ease}
+.step .d > div{overflow:hidden;padding-left:52px}
+.step .d p{color:var(--muted);font-size:16.5px;padding-bottom:16px;max-width:420px}
+.step.on .t{color:var(--deep)}
+.step.on .step-art{background:var(--aqua)}
+.step.on .d{grid-template-rows:1fr}
+.j-stage{position:relative;height:min(76vh,700px);display:flex;justify-content:center;align-items:flex-end}
+.j-stage .pbox{position:absolute;bottom:18px;left:50%;height:calc(100% - 18px);aspect-ratio:534/1100;transform:translateX(-50%)}
+.j-stage img{position:absolute;inset:0;width:100%;height:100%;max-width:none;opacity:0;transition:opacity .45s ease;filter:drop-shadow(0 22px 22px rgba(15,60,58,.16))}
+.ring{position:absolute;border-radius:12px;box-shadow:0 0 16px 200vmax rgba(12,30,29,.46);pointer-events:none}
+.j-stage .spot{position:absolute;inset:0;clip-path:inset(1.4% 4.2% 1.6% 3.1% round 11cqw)}
+.j-stage .pbox{container-type:inline-size}
+.j-stage .hl{position:absolute;inset:0;opacity:0;transition:opacity .35s ease .15s;pointer-events:none;z-index:3}
+.j-stage .hl.on{opacity:1}
+.j-stage .hl b{position:absolute;left:0;top:var(--yc);transform:translate(calc(-100% - 26px),-50%);white-space:nowrap;background:var(--deep);color:#fff;font-size:13.5px;font-weight:600;padding:7px 12px;border-radius:999px;box-shadow:0 10px 20px -10px rgba(0,0,0,.45)}
+.j-stage .hl b::after{content:"";position:absolute;left:100%;top:50%;height:2px;width:calc(var(--x1) * 1cqw + 26px);background:var(--fresh)}
+.j-stage::after{z-index:0;content:"";position:absolute;bottom:4px;left:50%;width:min(260px,40%);height:26px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(15,60,58,.28),rgba(15,60,58,0))}
+.j-stage img.on{opacity:1}
+.j-cards,.j-nav{display:none}
+@media all{
+  .j-wrap{grid-template-columns:minmax(0,1fr);gap:0;padding-bottom:var(--sec)}
+  .j-left{min-width:0}
+  ol.steps,.j-stage{display:none}
+  .j-cards{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;margin:28px calc(-1*var(--gutr)) 0 calc(-1*var(--gut));padding:4px var(--gutr) 12px var(--gut);scroll-padding-left:var(--gut);scrollbar-width:none}
+  .j-cards::-webkit-scrollbar{display:none}
+  .j-card{flex:0 0 min(80vw,360px);scroll-snap-align:start;background:#fff;border-radius:24px;padding:22px 20px 0;box-shadow:0 0 0 1px rgba(15,111,109,.08);display:flex;flex-direction:column;overflow:hidden}
+  .j-card .top{display:flex;align-items:center;gap:12px}
+  .j-card .step-art{background:var(--aqua)}
+  .j-card small{font-size:13px;font-weight:600;color:var(--teal)}
+  .j-card h3{font-size:23px;color:var(--deep);margin-top:2px;line-height:1.15}
+  .j-card p{color:var(--muted);font-size:16px;margin-top:12px}
+  .j-card .look{display:flex;align-items:center;gap:8px;margin-top:12px !important;font-size:14px !important;font-weight:600;color:var(--teal) !important}
+  .j-card .look span{width:10px;height:10px;border-radius:50%;background:var(--fresh);box-shadow:0 0 0 4px rgba(31,156,143,.22);flex:none;margin:0 2px}
+  .j-card .shot{margin:18px auto 22px;width:min(66vw,236px)}
+  .j-card .scr{position:relative;aspect-ratio:600/1301;overflow:hidden;border:7px solid #151918;border-radius:32px;background:var(--cream);box-shadow:0 14px 28px -18px rgba(15,40,38,.45)}
+  .j-card .scr img{position:absolute;inset:0;width:100%;height:100%;max-width:none}
+  .j-card .scr .ring{border-radius:9px;box-shadow:0 0 10px 200vmax rgba(12,30,29,.46)}
+  .j-nav{display:flex;justify-content:center;align-items:center;gap:14px;margin-top:16px}
+  .j-nav .jn{width:44px;height:44px;border-radius:50%;border:0;background:#fff;color:var(--deep);box-shadow:inset 0 0 0 1px rgba(15,111,109,.2);display:flex;align-items:center;justify-content:center}
+  .j-nav .jn:hover{background:var(--mint)}
+  .j-nav .jn[disabled]{opacity:.35;cursor:default}
+  .j-dots{display:flex;gap:2px}
+  .j-dots button{border:0;background:transparent;width:24px;height:44px;padding:0;display:flex;align-items:center;justify-content:center}
+  .j-dots button::before{content:"";width:8px;height:8px;border-radius:999px;background:rgba(15,111,109,.25);transition:width .3s, background .3s}
+  .j-dots button.on::before{width:20px;background:var(--deep)}
+}
+@media (min-width:600px) and (max-width:1023px){ .j-card{flex-basis:340px} }
+@media (min-width:1024px) and (min-height:600px) and (max-height:799px){
+  .j-wrap{padding-top:92px;padding-bottom:48px}
+  .j-left h2{font-size:clamp(34px,6.2vh,46px);margin-top:8px}
+  .j-left .thread{margin-top:12px}
+  ol.steps{margin-top:16px}
+  .step-btn{padding:6px 0;min-height:46px}
+  .step-btn .t{font-size:21px}
+  .step .d p{font-size:15.5px;padding-bottom:10px}
+  .j-stage{height:min(80vh,620px)}
+}
+@media (min-width:1024px) and (max-height:799px){ .fcard{display:none} }
+main > section[id]:not(#hero):not(#journey){scroll-margin-top:24px}
+
+/* ============ bubbles (chat-led) ============ */
+#help{background:var(--mint);padding:var(--sec) 0;overflow:hidden}
+.help-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,5vw,72px);align-items:center}
+.help-copy h2{margin-top:0}
+.help-copy > p{color:var(--muted);margin-top:14px;max-width:500px}
+.can{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-width:520px}
+.can li{background:rgba(255,255,255,.7);border-radius:16px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start}
+.can li svg{width:22px;height:22px;flex:none;color:var(--deep);margin-top:2px}
+.can b{display:block;font-size:15.5px;color:var(--ink)}
+.can span{font-size:14px;color:var(--muted);line-height:1.45}
+.chat{background:#fff;border-radius:26px;padding:18px;box-shadow:0 30px 60px -36px rgba(15,111,109,.65);width:100%;max-width:580px;justify-self:end}
+.chat-head{display:flex;align-items:center;gap:12px;padding:2px 4px 14px;border-bottom:1px solid #eef0ee}
+.chat-head img{width:48px;height:48px;border-radius:50%;background:var(--mint);object-fit:cover;object-position:50% 10%}
+.chat-head b{font-family:var(--serif);font-size:22px;color:var(--deep);display:block;line-height:1.1}
+.chat-head small{font-size:13px;color:var(--muted)}
+.chat-head .demo{margin-left:auto;font-size:13px;color:var(--muted)}
+.msgs{max-height:340px;overflow-y:auto;padding:16px 4px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:86%;padding:10px 14px;border-radius:18px;font-size:15.5px;line-height:1.5}
+.msg.bot{background:var(--cream);border-bottom-left-radius:6px;align-self:flex-start}
+.msg.me{background:var(--deep);color:#fff;border-bottom-right-radius:6px;align-self:flex-end}
+.msg.new{animation:rise .3s ease-out}
+@keyframes rise{from{transform:translateY(6px);opacity:.4}to{transform:none;opacity:1}}
+.typing{display:inline-flex;gap:4px;padding:14px 16px}
+.typing i{width:7px;height:7px;border-radius:50%;background:var(--fresh);animation:dot 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes dot{0%,100%{opacity:.35}50%{opacity:1}}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding-top:14px;border-top:1px solid #eef0ee}
+.chip{border:0;background:#fff;color:var(--deep);border-radius:999px;padding:10px 15px;min-height:44px;font-size:15px;font-weight:500;box-shadow:inset 0 0 0 1px rgba(15,111,109,.28);transition:background .2s, transform .15s}
+.chip:hover{background:var(--mint)}
+.chip:active{transform:scale(.96)}
+.chip[disabled]{opacity:.45;cursor:default}
+@media (max-width:899px){ .help-grid{grid-template-columns:minmax(0,1fr)} .chat{justify-self:stretch;max-width:none} }
+@media (max-width:479px){ .can{grid-template-columns:1fr} }
+
+
+.thread{display:flex;align-items:center;gap:10px;margin-top:16px;font-size:15px;color:var(--muted);background:#fff;border-radius:999px;padding:6px 16px 6px 6px;width:max-content;max-width:100%;box-shadow:0 0 0 1px rgba(15,111,109,.1)}
+.thread img{width:28px;height:28px;border-radius:50%;background:var(--mint);object-fit:cover;object-position:50% 10%;flex:none}
+.help-copy .portrait{width:120px;height:120px;border-radius:50%;background:#fff;object-fit:cover;object-position:50% 8%;box-shadow:0 18px 36px -22px rgba(15,111,109,.6);margin-bottom:22px}
+.help-copy .tryit{font-size:15px;color:var(--teal);font-weight:600;margin-top:18px}
+.chat-head .demo{background:var(--sand);color:#5a4637;font-weight:600;padding:5px 10px;border-radius:999px;font-size:12.5px}
+.asks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding-top:14px;border-top:1px solid #eef0ee}
+.asks button{display:flex;align-items:center;gap:10px;border:0;background:var(--cream);color:var(--ink);border-radius:14px;padding:12px 14px;min-height:48px;font-size:15px;font-weight:600;text-align:left;transition:background .2s, transform .12s}
+.asks button svg{width:20px;height:20px;color:var(--deep);flex:none}
+.asks button:hover{background:var(--mint)}
+.asks button:active{transform:scale(.97)}
+.asks button[disabled]{opacity:.5;cursor:default}
+.est-side .bill{margin:20px 0 0;font-size:15px;color:var(--on-dark-2);display:grid;grid-template-columns:1fr auto;gap:6px 16px}
+.est-side .bill dt,.est-side .bill dd{margin:0}
+.est-side .bill dd{text-align:right;font-variant-numeric:tabular-nums}
+.est-side .bill .sep{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.12);margin:4px 0}
+.est-side .next{margin-top:22px;color:var(--on-dark);font-weight:600;text-decoration:none;font-size:15px;align-self:flex-start;min-height:44px;display:inline-flex;align-items:center}
+.est-side .next:hover{text-decoration:underline}
+.ba{margin-top:40px;border-top:1px solid rgba(191,231,227,.3)}
+.ba-head,.ba-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+.ba-head{padding:16px 0;font-size:14px;font-weight:600;color:var(--on-dark)}
+.ba-row{border-top:1px solid rgba(191,231,227,.18);padding:18px 0}
+.ba-row p{margin:0;font-size:18px;line-height:1.45}
+.ba-row .old{color:rgba(255,255,255,.86)}
+.ba-row .new{color:#fff;font-weight:500;padding-left:28px;position:relative}
+.ba-row .new::before{content:"";position:absolute;left:0;top:7px;width:14px;height:8px;border-left:2.5px solid var(--aqua);border-bottom:2.5px solid var(--aqua);transform:rotate(-45deg)}
+@media (max-width:699px){ .ba-head{display:none} .ba-row{grid-template-columns:minmax(0,1fr);gap:6px} .ba-row .old{font-size:15.5px} .ba-row .old::before{content:"By message: ";font-weight:600;color:var(--on-dark)} .ba-row p{font-size:17px} }
+
+/* ============ price estimate ============ */
+#prices{background:linear-gradient(180deg,#EAF4F2,#F1F7F5);padding:var(--sec) 0}
+.pr-head{max-width:640px}
+.pr-head h2{margin-top:0}
+.pr-head p{color:var(--muted);margin-top:14px}
+.est{margin-top:36px;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);background:#fff;border-radius:28px;box-shadow:0 30px 60px -40px rgba(15,111,109,.55),0 0 0 1px rgba(15,111,109,.08)}
+.est-main{padding:clamp(20px,3vw,36px)}
+.tabs{display:grid;grid-template-columns:repeat(4,auto);width:100%;max-width:600px;background:var(--cream);border-radius:999px;padding:5px;gap:5px}
+.tabs button{border:0;background:#fff;border-radius:999px;padding:10px 12px;min-height:44px;font-weight:600;font-size:15px;color:var(--deep);white-space:nowrap;box-shadow:inset 0 0 0 1px rgba(15,111,109,.2);transition:background .2s,color .2s}
+.tabs button:hover{background:var(--mint)}
+.tabs button[aria-selected="true"]{background:var(--deep);color:#fff;box-shadow:none}
+.est-note{font-size:14px;color:var(--muted);margin-top:14px}
+.prov{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;margin-top:16px;font-size:14px;color:var(--muted)}
+.prov-name{font-weight:600;color:var(--ink)}
+.prov-meta span{color:#c08a2b}
+.est-opts{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;margin-top:10px}
+.est-opts .est-note{margin-top:0}
+.first{display:inline-flex;align-items:center;gap:10px;min-height:44px;font-size:14.5px;font-weight:600;color:var(--deep);cursor:pointer;user-select:none}
+.first input{appearance:none;-webkit-appearance:none;margin:0;width:40px;height:24px;border-radius:999px;background:#cfd8d6;position:relative;cursor:pointer;transition:background .2s;flex:none}
+.first input::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .2s}
+.first input:checked{background:var(--deep)}
+.first input:checked::after{transform:translateX(16px)}
+.first input:focus-visible{outline:3px solid var(--fresh);outline-offset:3px}
+.sample{display:inline-block;font-size:12.5px;font-weight:600;color:var(--deep);background:var(--mint);border-radius:999px;padding:3px 10px;white-space:nowrap;vertical-align:1px}
+.items{list-style:none;margin:16px 0 0;padding:0}
+.items li{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid #efece6}
+.items li:first-child{border-top:0}
+.items .nm b{display:block;font-weight:600;font-size:16px}
+.items .nm span{font-size:14px;color:var(--muted)}
+.qty{display:flex;align-items:center;gap:6px}
+.qty button{width:40px;height:40px;border-radius:50%;border:0;display:flex;align-items:center;justify-content:center;font-size:20px;line-height:1;transition:transform .12s, background .2s}
+.qty button:active{transform:scale(.9)}
+.qty .minus{background:#fff;color:var(--deep);box-shadow:inset 0 0 0 1.5px rgba(15,111,109,.35)}
+.qty .plus{background:var(--deep);color:#fff}
+.qty button[disabled]{opacity:.3;cursor:default}
+.qty output{min-width:30px;text-align:center;font-weight:600;font-variant-numeric:tabular-nums}
+.est-side{background:var(--room);color:var(--on-dark);padding:clamp(22px,3vw,32px);display:flex;flex-direction:column;align-self:start;position:sticky;top:84px;margin:14px;border-radius:20px}
+.est-side .lbl{font-size:14px;color:var(--on-dark-2)}
+.est-side .total{font-family:var(--serif);font-size:clamp(48px,5vw,68px);font-weight:700;line-height:1;margin-top:8px;font-variant-numeric:tabular-nums}
+.est-side .count{color:var(--on-dark-2);margin-top:8px;font-size:15px}
+.est-side .count .fine{display:none}
+.est-side .bill .tot{color:var(--on-dark);font-weight:600}
+.pop{animation:pop .35s ease}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.06)}100%{transform:scale(1)}}
+@media (max-width:899px){ .est{grid-template-columns:minmax(0,1fr);overflow:visible} .est-side{order:-1;top:76px;z-index:5;margin:10px;display:flex;flex-direction:row;align-items:center;gap:12px;padding:12px 18px;border-radius:16px;box-shadow:0 14px 30px -18px rgba(0,0,0,.5)} .est-side .lbl,.est-side .bill,.est-side .next{display:none} .est-side .total{margin:0;font-size:32px} .est-side .count{margin:0;font-size:14.5px;line-height:1.3} .est-side .count .fine{display:block;font-size:12.5px;margin-top:2px} }
+
+/* ============ services (laundry tags) ============ */
+#services{background:var(--cream);padding:var(--sec) 0;overflow:hidden}
+.sv-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px 40px;flex-wrap:wrap}
+.sv-head h2{margin-top:0;max-width:560px}
+.sv-head p{color:var(--muted);max-width:340px;font-size:15.5px}
+.rail{position:relative;margin-top:64px}
+.rail::before{content:"";position:absolute;left:calc(-1*var(--gut));right:calc(-1*var(--gutr));top:0;height:3px;background:#cdbfb3;border-radius:2px}
+.tags{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
+.tag{position:relative;display:flex;flex-direction:column;padding-top:42px;transform-origin:50% 0;filter:drop-shadow(0 16px 18px rgba(80,50,30,.2))}
+.tag.swing{animation:swing 1.6s cubic-bezier(.36,0,.3,1) both}
+.tag:nth-child(even).swing{animation-name:swing2}
+@keyframes swing{0%{transform:rotate(0)}20%{transform:rotate(-4deg)}45%{transform:rotate(2.5deg)}68%{transform:rotate(-1.2deg)}85%{transform:rotate(.5deg)}100%{transform:rotate(0)}}
+@keyframes swing2{0%{transform:rotate(0)}20%{transform:rotate(4deg)}45%{transform:rotate(-2.5deg)}68%{transform:rotate(1.2deg)}85%{transform:rotate(-.5deg)}100%{transform:rotate(0)}}
+.tag::before{content:"";position:absolute;left:50%;top:0;width:1.5px;height:44px;background:#a99482}
+.peg{position:absolute;left:50%;top:-9px;width:14px;height:32px;margin-left:-7px;border-radius:4px;background:linear-gradient(90deg,#c6ae9b,#E9D8CD 45%,#c3a995);box-shadow:0 2px 4px rgba(0,0,0,.12);z-index:2}
+.label{position:relative;flex:1;background:linear-gradient(160deg,#FFFCF8 0%,#F3E7DD 100%);clip-path:polygon(18% 0,82% 0,100% 11%,100% 100%,0 100%,0 11%);padding:44px 22px 24px;display:flex;flex-direction:column}
+.label::before{content:"";position:absolute;inset:10px;border:1.5px dashed rgba(120,90,70,.32);clip-path:polygon(17% 0,83% 0,100% 10%,100% 100%,0 100%,0 10%);pointer-events:none}
+.label .hole{position:absolute;left:50%;top:16px;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:var(--cream);box-shadow:0 0 0 4px rgba(255,255,255,.55), inset 0 1px 2px rgba(0,0,0,.2)}
+.label .ico{width:54px;height:54px;border-radius:16px;background:rgba(255,255,255,.65);color:var(--deep);display:flex;align-items:center;justify-content:center}
+.label .ico svg{width:30px;height:30px}
+.label h3{font-size:26px;color:#3b2f27;margin-top:18px}
+.label p{font-size:15.5px;color:#6a5b50;margin-top:6px}
+.label .good{margin-top:12px;font-size:14px;color:#6a5b50}
+.label .good b{font-weight:600;color:#3b2f27}
+.label .txt{display:block}
+.label .rate{margin-top:auto;padding-top:16px;font-size:15px;font-weight:600;color:#3b2f27;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.label .rate span{color:#5f5045;font-weight:500}
+.label .rate .pr{color:#3b2f27;align-self:baseline}
+.label .rate .pr b{font-family:var(--serif);font-size:25px;font-weight:700;color:var(--deep);margin:0 1px}
+.label .rate .eta{align-self:center;font-size:14px}
+.sv-more{margin-top:28px;font-size:15px;color:var(--muted)}
+@media (max-width:1023px){ .tags{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;row-gap:36px} .rail::before{display:none} }
+@media (max-width:599px){ .rail{margin-top:40px} .tags{grid-template-columns:minmax(0,1fr);gap:0;row-gap:22px} .tag{padding-top:22px} .tag::before{height:24px} .label{display:grid;grid-template-columns:44px minmax(0,1fr);column-gap:14px;align-items:start;padding:30px 18px 16px;clip-path:polygon(12% 0,88% 0,100% 16%,100% 100%,0 100%,0 16%)} .label::before{clip-path:polygon(11% 0,89% 0,100% 15%,100% 100%,0 100%,0 15%)} .label .hole{top:9px} .label .ico{width:44px;height:44px;border-radius:12px} .label .ico svg{width:24px;height:24px} .label h3{font-size:21px;margin-top:0} .label p{font-size:14.5px;margin-top:2px} .label .good{font-size:14px;margin-top:6px} .label .rate{grid-column:1/-1;padding-top:12px;margin-top:10px;border-top:1px dashed rgba(120,90,70,.3);font-size:15px} }
+
+/* ============ why it's easier ============ */
+#why{background:var(--deep);color:#fff;padding:var(--sec) 0;position:relative;overflow:hidden}
+#why .eyebrow{color:var(--aqua)}
+#why h2{font-size:var(--h2);max-width:680px;text-wrap:balance}
+.why-lede{margin-top:16px;max-width:560px;color:rgba(255,255,255,.9)}
+.why{list-style:none;margin:44px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.why li{border-top:1px solid rgba(191,231,227,.3);padding-top:22px}
+.why .n{font-family:var(--serif);font-size:44px;line-height:1;color:var(--aqua)}
+.why h3{font-size:24px;margin-top:14px;line-height:1.15}
+.why p{font-size:15.5px;color:rgba(255,255,255,.78);margin-top:8px}
+@media (max-width:1023px){ .why{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:32px} }
+@media (max-width:519px){ .why{grid-template-columns:minmax(0,1fr)} }
+
+/* ============ FAQ ============ */
+#faq{background:var(--cream);padding:var(--sec) 0}
+.faq-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(28px,5vw,72px);align-items:start}
+.faq-grid h2{margin-top:0}
+.faq-grid > div > p{color:var(--muted);margin-top:14px;max-width:400px}
+.qa details{border-top:1px solid rgba(15,111,109,.18)}
+.qa details:last-child{border-bottom:1px solid rgba(15,111,109,.18)}
+.qa summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 2px;font-family:var(--serif);font-size:22px;font-weight:700;color:var(--deep);min-height:44px}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary i{flex:none;width:32px;height:32px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 1px rgba(15,111,109,.25);position:relative;transition:transform .3s, background .2s}
+.qa summary i::before,.qa summary i::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:2px;margin:-1px 0 0 -6px;background:var(--deep);border-radius:2px}
+.qa summary i::after{transform:rotate(90deg);transition:transform .3s}
+.qa details[open] summary i{background:var(--aqua)}
+.qa details[open] summary i::after{transform:rotate(0)}
+.qa details p{color:var(--muted);padding:0 48px 22px 2px;max-width:640px}
+@media (max-width:899px){ .faq-grid{grid-template-columns:minmax(0,1fr)} .qa summary{font-size:20px} }
+
+/* ============ closing (doorstep scene) ============ */
+#closing{background:var(--room);color:var(--on-dark);position:relative;overflow:hidden;padding-top:var(--sec)}
+.close-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:end}
+.close-copy{padding-bottom:calc(var(--sec) + 20px)}
+.close-copy h2{font-size:clamp(40px, 3.4vw + 16px, 72px)}
+.close-copy h2 em{font-style:normal;color:var(--aqua)}
+.close-copy p{margin-top:16px;color:var(--on-dark-2);max-width:440px}
+.close-cta{margin-top:28px;display:flex;flex-wrap:wrap;gap:12px}
+.close-copy p.close-note{margin-top:14px;font-size:14px;opacity:.85;max-width:380px}
+@media (max-width:899px){ .close-grid{grid-template-columns:minmax(0,1fr);gap:8px} .close-copy{padding-bottom:12px} }
+
+/* ============ footer with wordmark ============ */
+footer{background:var(--room2);color:var(--on-dark-2);font-size:14px;position:relative;z-index:3;overflow:hidden}
+footer .big{font-family:var(--serif);font-weight:700;font-size:min(11vw,150px);line-height:.82;letter-spacing:-.03em;color:var(--cream);white-space:nowrap;padding-top:clamp(28px,4vw,56px);user-select:none}
+footer .big b{color:var(--aqua);font-weight:700}
+footer{border-top:1px solid rgba(255,255,255,.12)}
+footer .tagline{font-family:var(--serif);font-size:clamp(22px,1.4vw + 12px,30px);font-weight:600;color:var(--on-dark);margin-top:10px}
+footer .row{display:flex;justify-content:space-between;gap:8px 24px;flex-wrap:wrap;padding-top:18px;padding-bottom:max(22px,env(safe-area-inset-bottom));border-top:1px solid rgba(255,255,255,.06);margin-top:12px}
+
+
+/* ============ round 2 ============ */
+/* hero: Bubbles stands on something */
+.demo::after{content:"";position:absolute;left:14px;bottom:-18px;width:150px;height:18px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.5),rgba(0,0,0,0));z-index:1;pointer-events:none}
+@media (max-width:599px){ .demo::after{display:none} }
+
+/* journey: steps advance as you scroll, phone stays put; no pinning */
+@media (min-width:1024px) and (min-height:600px){
+  .j-wrap{align-items:start}
+  .j-stage{position:sticky;top:calc((100vh - min(76vh,700px)) / 2)}
+  ol.steps{margin-top:8px}
+  ol.steps li{min-height:52vh;display:flex;flex-direction:column;justify-content:center;border-top:0}
+  ol.steps li:last-child{border-bottom:0;min-height:62vh}
+  .step .d{grid-template-rows:1fr}
+}
+
+/* Bubbles: four jobs */
+.jobs{list-style:none;margin:28px 0 0;padding:0;max-width:520px}
+.jobs li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;padding:12px 0;border-top:1px solid rgba(15,111,109,.16)}
+.jobs li:last-child{border-bottom:1px solid rgba(15,111,109,.16)}
+.jobs svg{width:22px;height:22px;color:var(--deep);margin-top:3px}
+.jobs b{display:block;font-size:16px}
+.jobs span{font-size:15px;color:var(--muted);line-height:1.45}
+.help-copy > p.wont{margin-top:20px;max-width:520px;font-size:15.5px;color:var(--ink)}
+.asks button:last-child{grid-column:1/-1;background:#fff;box-shadow:inset 0 0 0 1px rgba(15,111,109,.22)}
+
+/* services: estimate from a tag */
+.label .est-link{margin-top:14px;align-self:flex-start;display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 16px;border-radius:999px;background:var(--deep);color:#fff;font-size:14.5px;font-weight:600;text-decoration:none;position:relative;z-index:1}
+.label .est-link:hover{background:#0b5755}
+@media (max-width:599px){ .label .est-link{grid-column:1/-1;justify-self:start} .tabs{grid-template-columns:1fr 1fr;border-radius:24px} }
+
+/* prices: pickup slot */
+.slot{border:0;margin:20px 0 0;padding:18px 0 0;border-top:1px solid #efece6;min-width:0}
+.slot legend{float:left;width:100%;padding:0;margin:0 0 10px;font-weight:600;font-size:16px}
+.slot-row{clear:both;display:flex;flex-wrap:wrap;gap:8px}
+.slot-row + .slot-row{margin-top:8px}
+.pill{position:relative}
+.pill input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+.pill span{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:999px;background:#fff;box-shadow:inset 0 0 0 1px rgba(15,111,109,.28);font-size:15px;font-weight:500;color:var(--deep);cursor:pointer;transition:background .2s,color .2s}
+.pill span:hover{background:var(--mint)}
+.pill input:checked + span{background:var(--deep);color:#fff;box-shadow:none}
+.pill input:focus-visible + span{outline:3px solid var(--fresh);outline-offset:2px}
+.est-side .slot-line{margin:16px 0 0;padding-top:14px;border-top:1px solid rgba(255,255,255,.12);font-size:15px;color:var(--on-dark)}
+@media (max-width:899px){ .est-side .slot-line{display:none} }
+
+/* why + proof */
+.proof{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(40px,6vw,88px);margin-top:80px;align-items:start}
+.proof-photo{position:relative;margin:0 0 48px}
+.proof-photo img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:20px}
+.check{position:absolute;right:-18px;bottom:-48px;width:min(290px,72%);background:var(--cream);color:var(--ink);border-radius:18px;padding:16px 18px;box-shadow:0 26px 44px -22px rgba(0,0,0,.7)}
+.check b{font-family:var(--serif);font-size:21px;color:var(--deep);display:block;line-height:1.1}
+.check small{font-size:13px;color:var(--muted)}
+.check ul{list-style:none;margin:10px 0 0;padding:0}
+.check li{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-top:1px solid #e9e3d8;font-size:14.5px}
+.check li span{font-weight:600;color:var(--deep);font-variant-numeric:tabular-nums}
+.check .ok{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:14px;font-weight:600;color:var(--deep)}
+.check .ok svg{width:18px;height:18px;flex:none}
+.tracker h3{font-size:clamp(28px,1.6vw + 14px,38px);color:#fff}
+.tracker > p{margin-top:10px;color:rgba(255,255,255,.88);font-size:16.5px}
+.stages{list-style:none;margin:22px 0 0;padding:0}
+.stages li{position:relative}
+.stages li:not(:last-child)::before{content:"";position:absolute;left:15px;top:40px;bottom:-12px;width:2px;background:rgba(191,231,227,.25)}
+.stages li.done::before{background:var(--aqua)}
+.stages button{all:unset;box-sizing:border-box;display:grid;grid-template-columns:32px minmax(0,1fr) auto;align-items:center;gap:12px;width:100%;min-height:52px;padding:6px 0;cursor:pointer;color:rgba(255,255,255,.86)}
+.stages button:focus-visible{outline:3px solid var(--aqua);outline-offset:2px;border-radius:8px}
+.stages .dot{width:22px;height:22px;border-radius:50%;box-shadow:inset 0 0 0 2px rgba(191,231,227,.55);justify-self:center;display:flex;align-items:center;justify-content:center;transition:background .3s, box-shadow .3s}
+.stages li.done .dot{background:var(--aqua);box-shadow:none}
+.stages li.done .dot::after{content:"";width:9px;height:5px;border-left:2px solid var(--deep);border-bottom:2px solid var(--deep);transform:translateY(-1px) rotate(-45deg)}
+.stages li.now .dot{background:var(--coral);box-shadow:0 0 0 3px var(--cream),0 0 0 9px rgba(230,110,100,.25)}
+.stages li.now button,.stages li.done button{color:#fff}
+.stages .nm{font-weight:600;font-size:16.5px}
+.stages time{font-size:14px;font-variant-numeric:tabular-nums}
+.stages li.later time{visibility:hidden}
+.stage-detail{margin-top:18px;background:rgba(0,0,0,.18);border-radius:16px;padding:16px 18px;font-size:16px;line-height:1.5;color:#fff;min-height:100px}
+.stage-detail b{display:block;margin-bottom:4px}
+.tracker .btn{margin-top:16px}
+@media (max-width:899px){ .proof{grid-template-columns:minmax(0,1fr);margin-top:56px} .check{right:12px;bottom:-40px} }
+
+/* closing: photo + Bubbles on the floor */
+.close-art{position:relative;padding-bottom:64px;display:flex;justify-content:flex-end;align-items:flex-end}
+.close-art .floor{position:absolute;left:-60vw;right:-60vw;bottom:0;height:64px;background:rgba(0,0,0,.14)}
+.close-photo{position:relative;z-index:1;width:min(100%,540px);aspect-ratio:3/2;object-fit:cover;border-radius:24px 24px 0 0}
+.close-bub{position:absolute;left:clamp(0px,3vw,32px);bottom:54px;height:clamp(160px,17vw,240px);width:auto;max-width:none;z-index:2;filter:drop-shadow(6px 10px 14px rgba(0,0,0,.4))}
+@media (max-width:899px){ .close-art{margin-top:24px} .close-bub{height:150px;left:8px} }
+
+footer .row a{color:var(--on-dark);text-underline-offset:3px}
+::selection{background:var(--aqua);color:#0b2f2e}
+
+/* ============ round 3: warmth, trust ============ */
+/* one grade for every photo: pull greys toward the brand cream */
+.proof-photo img{filter:sepia(.14) saturate(.96)}
+.close-photo{filter:sepia(.24) saturate(.88) brightness(1.03)}
+
+/* hero: warm light, a real object, a trust strip */
+.demo::before{content:"";position:absolute;left:-12%;right:-26%;top:-14%;bottom:-18%;background:radial-gradient(closest-side,rgba(233,216,205,.17),rgba(233,216,205,0));z-index:0;pointer-events:none}
+/* hero: the mascot stands beside the card; nothing overlaps her */
+.trust{list-style:none;margin:30px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,max-content);gap:12px 28px;font-size:15px;color:var(--on-dark)}
+.trust li{display:flex;align-items:center;gap:10px}
+.trust svg{width:20px;height:20px;color:var(--aqua);flex:none}
+@media (max-width:599px){ .trust{grid-template-columns:minmax(0,1fr);gap:9px;font-size:14.5px;margin-top:22px} }
+.d-ask{display:flex;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid rgba(15,111,109,.12)}
+.d-ask input{flex:1;min-width:0;min-height:46px;border:0;border-radius:999px;padding:0 16px;font:inherit;font-size:16px;background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1.5px rgba(15,111,109,.28)}
+.d-ask input::placeholder{color:#686e74}
+.d-ask input:focus{outline:none;box-shadow:inset 0 0 0 2px var(--deep)}
+.d-ask button{flex:none;width:46px;height:46px;border:0;border-radius:50%;background:var(--deep);color:#fff;display:flex;align-items:center;justify-content:center;transition:background .2s, transform .15s}
+.d-ask button:hover{background:#0b5755}
+.d-ask button:active{transform:scale(.94)}
+.d-ask button[disabled]{opacity:.45;cursor:default}
+.d-ask button svg{width:20px;height:20px}
+.d-hint{font-size:13px;color:var(--muted);margin:8px 4px 0}
+.demo.noitems .d-book dl,.demo.noitems .d-book > .rv:last-child{display:none}
+
+/* proof: right after the hero */
+#proof{background:#F4ECE4;padding:var(--sec) 0;overflow:hidden}
+.pf-head{max-width:700px}
+.pf-head p{color:var(--muted);margin-top:14px;max-width:600px}
+.pf-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(40px,6vw,88px);margin-top:48px;align-items:start}
+.fp h3{font-size:clamp(26px,1.4vw + 14px,32px);color:var(--deep)}
+.fp-steps{list-style:none;counter-reset:fp;margin:20px 0 0;padding:0}
+.fp-steps li{position:relative;padding:0 0 20px 46px;counter-increment:fp}
+.fp-steps li::before{content:counter(fp);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--deep);color:#fff;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center}
+.fp-steps li:not(:last-child)::after{content:"";position:absolute;left:14px;top:34px;bottom:4px;width:2px;background:rgba(15,111,109,.2)}
+.fp-steps b{display:block;font-size:16.5px;line-height:1.35;padding-top:3px}
+.fp-steps span{display:block;color:var(--muted);font-size:15.5px;line-height:1.5}
+.rider{display:flex;align-items:center;gap:12px;margin-top:10px;background:#fff;border-radius:14px;padding:10px 14px 10px 10px;box-shadow:0 0 0 1px rgba(15,111,109,.12);max-width:340px}
+.rider .av{width:40px;height:40px;border-radius:50%;background:var(--aqua);color:#0a4f4e;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;flex:none}
+.rider b{font-size:15px;padding:0}
+.rider small{display:block;font-size:13px;color:var(--muted)}
+.rider .ok{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;color:var(--deep)}
+.rider .ok svg{width:16px;height:16px}
+.promises{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;margin:80px 0 0}
+.promises div{border-top:2px solid var(--deep);padding-top:16px}
+.promises dt{font-family:var(--serif);font-size:23px;font-weight:700;color:var(--deep);line-height:1.15}
+.promises dd{margin:8px 0 0;color:var(--muted);font-size:15.5px}
+.pf-note{margin-top:22px;font-size:14px;color:var(--muted)}
+@media (max-width:899px){ .pf-grid{grid-template-columns:minmax(0,1fr)} .promises{grid-template-columns:1fr 1fr;margin-top:64px} }
+@media (max-width:519px){ .promises{gap:20px 16px} .promises dt{font-size:19px} .promises dd{font-size:14.5px} }
+
+/* tracker now lives under the comparison */
+.track-wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,5vw,72px);margin-top:80px;align-items:start}
+.tracker-intro h3{font-size:clamp(28px,1.6vw + 14px,38px);color:#fff}
+.tracker-intro p{margin-top:10px;color:rgba(255,255,255,.88);font-size:16.5px;max-width:360px}
+.tracker .stages{margin-top:0}
+@media (max-width:899px){ .track-wrap{grid-template-columns:minmax(0,1fr);margin-top:56px;gap:20px} }
+
+/* shorter service tags on phones */
+@media (max-width:599px){
+  .tags{row-gap:14px} .tag{padding-top:16px} .tag::before{height:18px}
+  .label{padding:24px 16px 14px} .label .good{display:none}
+  .label .rate{margin-top:8px;padding-top:10px} .label .est-link{margin-top:10px} .rail{margin-top:28px}
+}
+
+/* ============ round 4: shorter page ============ */
+#est{scroll-margin-top:84px}
+#prices .rail{margin-top:48px}
+#prices .sv-more{margin-bottom:8px}
+#why .track-wrap{margin-top:0;align-items:center}
+#why .tracker-intro h2{font-size:var(--h2);color:#fff;max-width:440px}
+#why .tracker-intro p{max-width:420px}
+@media (min-width:1280px){
+  .j-cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;overflow:visible;margin:40px 0 0;padding:0}
+  .j-card{padding:18px 16px 0}
+  .j-card h3{font-size:20px}
+  .j-card p{font-size:15px}
+  .j-card .shot{width:100%;margin:16px 0 18px}
+  .j-nav{display:none}
+}
+@media (max-width:599px){
+  .tags{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin:0 calc(-1*var(--gutr)) 0 calc(-1*var(--gut));padding:4px var(--gutr) 14px var(--gut);scroll-padding-left:var(--gut);scrollbar-width:none}
+  .tags::-webkit-scrollbar{display:none}
+  .tag{flex:0 0 82%;scroll-snap-align:start}
+  #prices .rail{margin-top:28px}
+}
+
+.close-bag{position:absolute;left:clamp(0px,3vw,32px);bottom:46px;width:clamp(150px,15vw,196px);height:auto;z-index:2;filter:drop-shadow(4px 8px 12px rgba(0,0,0,.3))}
+@media (max-width:899px){ .close-bag{width:140px;left:8px} }
+
+/* ============ round 5: context for recruiters ============ */
+.concept-bar{margin:0;background:#0B5856;color:var(--on-dark);font-size:13.5px;line-height:1.4;text-align:center;padding:7px 16px}
+.concept-bar a{color:var(--on-dark);font-weight:600;text-underline-offset:3px}
+.concept-bar a:hover{color:#fff}
+header.top.solid .concept-bar{display:none}
+header.top:not(.solid) ~ .menu-sheet{top:108px}
+.hero-grid{padding-top:150px}
+@media (max-width:1023px){ .hero-grid{padding-top:138px} }
+@media (max-width:599px){ .hero-grid{padding-top:130px} .concept-bar{font-size:13px} }
+
+/* ============ round 6: mobile fixes, hero conversation, laundry details ============ */
+/* hero conversation */
+.d-hello{align-self:flex-start;max-width:86%;background:#fff;color:var(--ink);padding:10px 14px;border-radius:18px 18px 18px 6px;font-size:15px;line-height:1.45;box-shadow:0 0 0 1px rgba(15,111,109,.1);transition:opacity .45s var(--out), transform .45s var(--out)}
+.demo.nohello .d-hello{opacity:0;transform:translateY(8px);transition:none}
+.demo.nome .d-me{display:none}
+.d-book dl div{padding:5px 0}
+.d-try{display:flex;flex-wrap:nowrap;align-items:center;gap:6px;margin:10px -18px 0;padding:0 18px 2px;overflow-x:auto;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent)}
+.d-try::-webkit-scrollbar{display:none}
+.d-try button{flex:none;white-space:nowrap}
+.d-try span{font-size:13.5px;color:var(--muted);margin-right:2px}
+.d-try button{border:0;background:#fff;color:var(--deep);border-radius:999px;padding:0 12px;min-height:44px;font-size:13.5px;font-weight:600;box-shadow:inset 0 0 0 1px rgba(15,111,109,.28);transition:background .2s ease, opacity .2s ease}
+@media (hover:hover) and (pointer:fine){ .d-try button:hover{background:var(--mint)} }
+.d-try button:active{transform:scale(.97)}
+.demo.busy .d-try button{opacity:.5;pointer-events:none}
+
+/* soap bubbles: slow, constant drift behind the hero */
+.hero-bubbles{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.hero-bubbles i{position:absolute;bottom:-80px;width:var(--s);height:var(--s);left:var(--x);border-radius:50%;background:radial-gradient(circle at 32% 30%,rgba(255,255,255,.55) 0 10%,rgba(191,231,227,.06) 14% 62%,rgba(191,231,227,.22) 100%);box-shadow:inset 0 0 0 1.5px rgba(191,231,227,.4);animation:bubble-rise var(--d) linear var(--w) infinite;opacity:0}
+.hero-bubbles i:nth-child(1){--s:46px;--x:50%;--d:19s;--w:-2s}
+.hero-bubbles i:nth-child(2){--s:22px;--x:56%;--d:15s;--w:-9s}
+.hero-bubbles i:nth-child(3){--s:64px;--x:62%;--d:24s;--w:-14s}
+.hero-bubbles i:nth-child(4){--s:28px;--x:70%;--d:17s;--w:-5s}
+.hero-bubbles i:nth-child(5){--s:38px;--x:78%;--d:21s;--w:-17s}
+.hero-bubbles i:nth-child(6){--s:18px;--x:85%;--d:14s;--w:-3s}
+.hero-bubbles i:nth-child(7){--s:54px;--x:90%;--d:26s;--w:-11s}
+.hero-bubbles i:nth-child(8){--s:26px;--x:96%;--d:18s;--w:-7s}
+@keyframes bubble-rise{0%{transform:translate3d(0,0,0);opacity:0}10%{opacity:1}85%{opacity:1}100%{transform:translate3d(28px,-115vh,0);opacity:0}}
+@media (max-width:1023px){ .hero-bubbles i:nth-child(-n+5){display:none} .hero-bubbles i:nth-child(6){--x:84%} }
+
+/* washing line across the top of the trust section */
+#proof{position:relative}
+.wash-line{position:absolute;left:0;right:0;top:20px;height:96px;pointer-events:none}
+.wash-line .rope{position:absolute;left:-2%;right:-2%;top:0;height:2px;background:#CDBFB3;border-radius:2px;transform:rotate(-.5deg)}
+.wash-line .g{position:absolute;top:-6px;transform-origin:50% 0}
+.wash-line .g svg{display:block;width:100%;height:auto;filter:drop-shadow(0 10px 10px rgba(80,50,30,.16))}
+.wash-line .g1{right:7%;width:64px}
+.wash-line .g2{right:16%;width:32px}
+.wash-line .g3{right:23%;width:48px}
+.wash-line.go .g1{animation:swing 1.6s cubic-bezier(.36,0,.3,1) both}
+.wash-line.go .g2{animation:swing2 1.6s cubic-bezier(.36,0,.3,1) .12s both}
+.wash-line.go .g3{animation:swing 1.6s cubic-bezier(.36,0,.3,1) .24s both}
+@media (max-width:1023px){ #proof{padding-top:calc(var(--sec) + 48px)} }
+@media (max-width:599px){ .wash-line .g1{right:5%;width:48px} .wash-line .g2{right:20%;width:24px} .wash-line .g3{right:30%;width:36px} }
+
+/* proof photo: the check card sits under the photo on phones and tablets instead of covering it */
+@media (max-width:899px){
+  .proof-photo{margin-bottom:0}
+  .check{position:relative;right:auto;bottom:auto;width:auto;margin:-36px 14px 0}
+}
+
+/* concept bar: one line on phones */
+.cb-short{display:none}
+@media (max-width:599px){ .cb-long{display:none} .cb-short{display:inline} }
+
+/* phones: shorter hero, two compact trust columns, closing buttons in a row */
+@media (max-width:599px){
+  .hero-grid{gap:122px}
+  .trust{grid-template-columns:1fr 1fr;gap:10px 14px;font-size:13.5px}
+  .trust li{align-items:flex-start}
+  .trust svg{width:18px;height:18px;margin-top:1px}
+  .close-cta .btn-light{flex:1 1 100%}
+  .close-cta .btn-line{flex:1 1 0;padding:12px 10px;font-size:14.5px}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .hero-bubbles{display:none}
+}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="logo" viewBox="0 0 120 120">
+      <path d="M51 18 C51 10 56 5 62.5 5 C69 5 73.5 9.5 73.5 15.5 C73.5 21.5 68.5 24 64.5 26.5 C62.5 28 61.5 29.5 61.5 31.5" stroke="#0F6F6D" stroke-width="6.5" fill="none" stroke-linecap="round"/>
+      <path d="M61.5 31 L92 42 C101 45 108 52 110 60 L98 68 L90 63 L90 70 C72 60 50 66 30 82 L30 63 L22 68 L10 60 C12 52 19 45 28 42 Z" fill="#0F6F6D"/>
+      <path d="M90 70 C72 60 50 66 30 82 C23 88 16 97 12 106 C32 92 54 86 74 92 C83 95 90 91 90 84 Z" fill="#1F9C8F"/>
+      <path d="M90 84 C90 91 83 95 74 92 C54 86 32 92 12 106 C30 113 52 117 70 113 C84 110 92 101 90 84 Z" fill="#BFE7E3"/>
+      <path d="M50 44 C56 51.5 66 51.5 72 44" stroke="#F8F3EA" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+      <path d="M105 8 L107.6 15.4 L115 18 L107.6 20.6 L105 28 L102.4 20.6 L95 18 L102.4 15.4 Z" fill="#1F9C8F"/>
+    </symbol>
+    <symbol id="logo-rev" viewBox="0 0 120 120">
+      <path d="M51 18 C51 10 56 5 62.5 5 C69 5 73.5 9.5 73.5 15.5 C73.5 21.5 68.5 24 64.5 26.5 C62.5 28 61.5 29.5 61.5 31.5" stroke="#F8F3EA" stroke-width="6.5" fill="none" stroke-linecap="round"/>
+      <path d="M61.5 31 L92 42 C101 45 108 52 110 60 L98 68 L90 63 L90 70 C72 60 50 66 30 82 L30 63 L22 68 L10 60 C12 52 19 45 28 42 Z" fill="#F8F3EA"/>
+      <path d="M90 70 C72 60 50 66 30 82 C23 88 16 97 12 106 C32 92 54 86 74 92 C83 95 90 91 90 84 Z" fill="#BFE7E3"/>
+      <path d="M90 84 C90 91 83 95 74 92 C54 86 32 92 12 106 C30 113 52 117 70 113 C84 110 92 101 90 84 Z" fill="#1F9C8F"/>
+      <path d="M105 8 L107.6 15.4 L115 18 L107.6 20.6 L105 28 L102.4 20.6 L95 18 L102.4 15.4 Z" fill="#BFE7E3"/>
+    </symbol>
+    <!-- brand illustrations (from the Figma file) -->
+<symbol id="ico-s1" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-7l-4.5 3.5V17H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="M7.5 9.5h9M7.5 12.5h5.5"/></g></symbol><symbol id="ico-s2" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2.5"/><path d="M9 4V2.8h6V4"/><path d="M8.5 10h7M8.5 13.5h4.5"/><path d="m8.6 17 1.5 1.5 3-3"/></g></symbol><symbol id="ico-s3" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-2-1.4-2 1.4-2-1.4-2 1.4-2-1.4-2 1.4z"/><path d="M9 8h6M9 11.5h6M9 15h3.5"/></g></symbol><symbol id="ico-s4" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 9.5h18M8 3v4M16 3v4"/><path d="m9 15 2 2 4-4"/></g></symbol><symbol id="ico-s5" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z"/></g></symbol>
+    <symbol id="ill-basket" viewBox="28 36 184 150"><path d="M58 90C52 54 92 40 116 62C136 30 188 40 184 90H58Z" fill="#E9D8CD"/><path d="M96 88C98 64 124 56 140 70C150 58 170 62 166 88H96Z" fill="#1F9C8F"/><circle cx="72" cy="80" r="16" fill="#BFE7E3"/><path d="M44 98H196L182 182H58L44 98Z" fill="#1F9C8F"/><path d="M52 122H188M55 146H185M57 168H183" stroke="white" stroke-width="5" stroke-linecap="round"/><path d="M198 84H42C36.48 84 32 88.48 32 94C32 99.52 36.48 104 42 104H198C203.52 104 208 99.52 208 94C208 88.48 203.52 84 198 84Z" fill="#0F6F6D"/></symbol>
+    <symbol id="ill-bag" viewBox="50 36 130 146"><path d="M90 66C90 40 140 40 140 66" stroke="#0F6F6D" stroke-width="8" stroke-linecap="round" fill="none"/><path d="M66 66H164L172 176H58L66 66Z" fill="#0F6F6D"/><path d="M100 104L110 98C112 103 122 103 124 98L134 104L130 113L125 111V133H105V111L100 113V104Z" fill="#F8F3EA"/></symbol>
+    <symbol id="ill-stack" viewBox="36 8 188 178"><path d="M92 46C84 34 100 26 92 14M120 46C112 34 128 26 120 14M148 46C140 34 156 26 148 14" stroke="#BFE7E3" stroke-width="5" stroke-linecap="round" fill="none"/><path d="M190 148H50C44.48 148 40 152.48 40 158V172C40 177.52 44.48 182 50 182H190C195.52 182 200 177.52 200 172V158C200 152.48 195.52 148 190 148Z" fill="#0F6F6D"/><path d="M184 110H58C52.48 110 48 114.48 48 120V134C48 139.52 52.48 144 58 144H184C189.52 144 194 139.52 194 134V120C194 114.48 189.52 110 184 110Z" fill="#BFE7E3"/><path d="M176 72H68C62.48 72 58 76.48 58 82V96C58 101.52 62.48 106 68 106H176C181.52 106 186 101.52 186 96V82C186 76.48 181.52 72 176 72Z" fill="white" stroke="#E9D8CD" stroke-width="3"/><path d="M76 88H120" stroke="#E9D8CD" stroke-width="4" stroke-linecap="round"/><path d="M206 60L209 70L219 73L209 76L206 86L203 76L193 73L203 70L206 60Z" fill="#1F9C8F"/></symbol>
+    <symbol id="ill-door" viewBox="24 16 192 172"><path d="M206 20H134C130.69 20 128 22.69 128 26V178C128 181.31 130.69 184 134 184H206C209.31 184 212 181.31 212 178V26C212 22.69 209.31 20 206 20Z" fill="#E9D8CD"/><circle cx="196" cy="104" r="5" fill="#0F6F6D"/><path d="M50 98C50 76 96 76 96 98" stroke="#0F6F6D" stroke-width="7" stroke-linecap="round" fill="none"/><path d="M34 98H112L118 184H28L34 98Z" fill="#0F6F6D"/><path d="M62 128L71 123C73 127 81 127 83 123L92 128L89 136L84 134V152H68V134L64 136L62 128Z" fill="#F8F3EA"/><circle cx="106" cy="70" r="22" fill="#1F9C8F"/><path d="M95 70L103 78L117 63" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+    <symbol id="ill-chat" viewBox="0 0 64 64"><path d="M30 10h22a6 6 0 0 1 6 6v12a6 6 0 0 1-6 6h-2v6l-7-6H30a6 6 0 0 1-6-6V16a6 6 0 0 1 6-6z" fill="#BFE7E3"/><path d="M12 20h26a6 6 0 0 1 6 6v14a6 6 0 0 1-6 6H22l-9 8v-8h-1a6 6 0 0 1-6-6V26a6 6 0 0 1 6-6z" fill="#1F9C8F"/><circle cx="17" cy="33" r="2.6" fill="#F8F3EA"/><circle cx="25" cy="33" r="2.6" fill="#F8F3EA"/><circle cx="33" cy="33" r="2.6" fill="#F8F3EA"/></symbol>
+    <symbol id="ico-chat" viewBox="0 0 32 32"><path d="M6 8h20a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H14l-6 5v-5H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="11" cy="15.5" r="1.3" fill="currentColor"/><circle cx="16" cy="15.5" r="1.3" fill="currentColor"/><circle cx="21" cy="15.5" r="1.3" fill="currentColor"/></symbol>
+    <symbol id="ico-tag" viewBox="0 0 32 32"><path d="M27 16L16 27 5 16V5h11z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="10.5" cy="10.5" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="ico-swap" viewBox="0 0 32 32"><path d="M6 11h18l-4-4M26 21H8l4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="ico-help" viewBox="0 0 32 32"><circle cx="16" cy="16" r="11" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12.5 13a3.5 3.5 0 1 1 5 3.2c-1 .5-1.5 1.2-1.5 2.3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="16" cy="22.3" r="1.2" fill="currentColor"/></symbol>
+    <symbol id="care-wash" viewBox="0 0 32 32"><path d="M4 9l3 16h18l3-16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M4 9c2 2 4 2 6 0s4-2 6 0 4 2 6 0 4-2 6 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="care-iron" viewBox="0 0 32 32"><path d="M5 23h22c0-6-3-11-10-11h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M5 23c0-4 2-7 7-8" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="16" cy="19" r="1.3" fill="currentColor"/></symbol>
+  </defs>
+</svg>
+
+<header class="top dark" id="top">
+  <p class="concept-bar"><span class="cb-long">A concept project by </span><span class="cb-short">Concept by </span>Om Mangrulkar<span aria-hidden="true"> · </span><a data-link="caseStudy" hidden>Read the case study</a></p>
+  <div class="wrap bar">
+    <a class="brand" href="#hero" aria-label="Easy Laundry, back to top"><svg aria-hidden="true"><use id="brandUse" href="#logo-rev"/></svg><span class="brand-word">Easy <b>Laundry</b></span></a>
+    <div class="bar-r">
+    <nav class="links" aria-label="Sections">
+      <a href="#proof">Our promise</a><a href="#journey">How it works</a><a href="#help">Ask Bubbles</a><a href="#prices">Prices</a><a data-link="caseStudy" hidden>Case study</a>
+    </nav>
+    <a class="app-btn" href="#prices">Get a price</a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menuSheet" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    </div>
+  </div>
+</header>
+<nav class="menu-sheet" id="menuSheet" aria-label="Sections menu">
+  <a href="#proof">Our promise</a><a href="#journey">How it works</a><a href="#help">Ask Bubbles</a><a href="#prices">Prices</a><a data-link="caseStudy" hidden>Case study</a>
+</nav>
+
+<main>
+<section id="hero" aria-labelledby="heroTitle">
+  <div class="hero-bubbles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="wrap hero-grid">
+    <div class="hero-copy" id="heroCopy">
+      <h1 id="heroTitle">Laundry, booked in <em>one sentence.</em></h1>
+      <p class="sub">Easy Laundry is a concept app for doorstep laundry. Tell Bubbles, its helper, what needs cleaning, and your clothes are picked up from your door and come back clean.</p>
+      <div class="cta-row">
+        <a class="btn btn-light" href="#prices">Get a price</a>
+        <a class="btn btn-line" href="#journey">See how it works</a>
+      </div>
+      <ul class="trust" aria-label="What every order includes">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-2.5h6L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.5"/></svg>Counted and photographed at pickup</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12l-8 8-9-9V3h8z"/><circle cx="7.5" cy="7.5" r="1.4"/></svg>Price shown before you book</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v5M18 9.5v5"/></svg>Pay now or on delivery</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Two-hour pickup window</li>
+      </ul>
+    </div>
+    <figure class="demo" id="demo">
+      <figcaption class="sr">Example: one message to Bubbles becomes a complete booking.</figcaption>
+      <img class="demo-bub" src="bubbles.webp" alt="" width="380" height="554">
+      <div class="demo-card">
+        <div class="dc-head"><img src="avatar.webp" alt=""><div><b>Bubbles</b><small>Your laundry helper</small></div></div>
+        <div class="dc-body">
+          <p class="d-hello">Hi! What needs cleaning today?</p>
+          <p class="d-me"><span class="sr" id="dTypeSr">You: 3 shirts and 2 jeans, steam pressed, tomorrow morning</span><span id="dType" aria-hidden="true">3 shirts and 2 jeans, steam pressed, tomorrow morning</span><i class="caret" aria-hidden="true"></i></p>
+          <span class="d-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <div class="d-book" aria-live="polite">
+            <p class="d-say rv" style="--i:0" id="dSay">Done. Here's your booking to check:</p>
+            <dl>
+              <div class="rv" style="--i:1"><dt>Service</dt><dd id="dSvc">Steam Press</dd></div>
+              <div class="rv" style="--i:2"><dt>Laundry</dt><dd>CleanCare Laundry, 1.2 km</dd></div>
+              <div class="rv" style="--i:3"><dt>Items</dt><dd id="dItems">3 shirts, 2 jeans</dd></div>
+              <div class="rv" style="--i:4"><dt>Pickup</dt><dd id="dWhen">Tomorrow, 9 to 11 AM</dd></div>
+            </dl>
+            <div class="rv" style="--i:5"><div class="d-total"><span>You pay</span><b id="dTotal">₹98</b></div>
+            <small class="d-fine" id="dFine">₹110 items − ₹22 first-order discount + ₹10 pickup</small></div>
+          </div>
+        </div>
+        <form class="d-ask" id="dAsk" autocomplete="off">
+          <label class="sr" for="dAskInput">Tell Bubbles what needs cleaning</label>
+          <input id="dAskInput" type="text" placeholder="2 sarees, dry clean, Saturday" enterkeyhint="send" maxlength="120">
+          <button type="submit" aria-label="Send to Bubbles"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </form>
+        <div class="d-try"><span>Try:</span><button type="button" data-try="2 sarees, dry clean, Saturday">2 sarees · dry clean</button><button type="button" data-try="5 kg wash and fold today">5 kg wash &amp; fold</button><button type="button" data-try="4 shirts ironed, tomorrow evening">4 shirts · iron</button></div>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<section id="proof" aria-labelledby="pfTitle">
+  <div class="wash-line" aria-hidden="true"><span class="rope"></span><span class="g g1"><svg viewBox="0 0 60 62"><rect x="27" y="0" width="6" height="14" rx="2" fill="#C6AE9B"/><path d="M18 9 26 5Q30 10 34 5L42 9 54 20 46 28 42 24V60H18V24L14 28 6 20Z" fill="#BFE7E3"/><path d="M26 5Q30 12 34 5" fill="none" stroke="#0F6F6D" stroke-width="2"/><path d="M24 40h12" stroke="#1F9C8F" stroke-width="2.5" stroke-linecap="round"/></svg></span><span class="g g2"><svg viewBox="0 0 34 66"><rect x="12" y="0" width="6" height="14" rx="2" fill="#C6AE9B"/><path d="M7 8H24V38Q24 44 30 48Q36 53 31 59Q26 65 16 60L9 54Q4 49 7 43Z" fill="#F8F3EA"/><rect x="7" y="8" width="17" height="7" fill="#1F9C8F"/></svg></span><span class="g g3"><svg viewBox="0 0 50 66"><rect x="22" y="0" width="6" height="14" rx="2" fill="#C6AE9B"/><rect x="5" y="8" width="40" height="56" rx="4" fill="#E9D8CD"/><rect x="5" y="46" width="40" height="5" fill="#0F6F6D" opacity=".55"/><rect x="5" y="54" width="40" height="3" fill="#0F6F6D" opacity=".35"/></svg></span></div>
+  <div class="wrap">
+    <div class="pf-head">
+      <h2 class="sec-title" id="pfTitle">Your clothes, accounted for.</h2>
+      <p>The biggest worry with any laundry pickup is simple: will everything come back? So every item is counted with you and photographed before it leaves your door.</p>
+    </div>
+    <div class="pf-grid">
+      <figure class="proof-photo">
+        <img src="photo-proof.jpg" alt="Two hands holding a stack of five freshly folded tops" width="1200" height="800" loading="lazy">
+        <div class="check" aria-label="Pickup check on the order screen">
+          <b>Pickup check</b><small>Order #1024 · counted at your door</small>
+          <ul><li>Shirts<span>3 of 3</span></li><li>Jeans<span>2 of 2</span></li></ul>
+          <p class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>5 items counted · 5 photos saved</p>
+        </div>
+      </figure>
+      <div class="fp">
+        <h3>Your first pickup, step by step</h3>
+        <ol class="fp-steps">
+          <li><b>Before pickup</b><span>A reminder the night before, then a message when the rider is on the way.</span></li>
+          <li><b>At your door</b><span>The rider's name and photo match what the app shows.</span>
+            <div class="rider"><span class="av" aria-hidden="true">RK</span><div><b>Ravi K.</b><small>Sample rider · ID verified</small></div><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>Verified</span></div></li>
+          <li><b>Counted together</b><span>Each item is counted with you and photographed. The receipt lands on your phone.</span></li>
+          <li><b>Back in 24 to 48 hours</b><span>The same count again at delivery, so nothing goes missing.</span></li>
+        </ol>
+      </div>
+    </div>
+    <dl class="promises" aria-label="Promises this concept is designed around">
+      <div><dt>Washed separately</dt><dd>Your clothes never share a load with anyone else's.</dd></div>
+      <div><dt>Pay now or on delivery</dt><dd>UPI, card or net banking in the app, or cash when your clothes come back.</dd></div>
+      <div><dt>Free re-clean</dt><dd>If something isn't right, the laundry cleans it again at no charge.</dd></div>
+      <div><dt>Answers in 48 hours</dt><dd>Damage or missing-item reports get a reply within two days.</dd></div>
+    </dl>
+    <p class="pf-note">These are the policies the Easy Laundry concept is designed around.</p>
+  </div>
+</section>
+
+<section id="journey" aria-labelledby="jTitle">
+  <div class="wrap j-wrap">
+    <div class="j-left">
+      <h2 class="sec-title" id="jTitle">Five steps from laundry pile to your door.</h2>
+      <p class="thread"><img src="avatar.webp" alt="">Following one order: 3 shirts and 2 jeans, steam pressed.</p>
+      <div class="j-cards" id="jCards" role="region" aria-label="Five steps, swipe to see each">
+        <article class="j-card"><div class="top"><span class="step-art"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#ico-s1"/></svg></span><div><small>Step 1</small><h3>Tell Bubbles what you need</h3></div></div><p>Type it the way you'd say it, right from the home screen. There's no form to fill in first.</p><p class="look"><span></span>Type it here</p><div class="shot"><div class="scr"><img src="app-home.jpg" alt="Phone showing the Easy Laundry home screen with the Tell Bubbles field" loading="lazy" width="600" height="1301"><span class="ring" style="left:5.1%;top:19.7%;width:89.8%;height:6.1%"></span></div></div></article>
+        <article class="j-card"><div class="top"><span class="step-art"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#ico-s2"/></svg></span><div><small>Step 2</small><h3>Bubbles fills in the details</h3></div></div><p>Bubbles picks a service and a nearby laundry. Change anything, or skip the chat and pick yourself.</p><p class="look"><span></span>Bubbles' summary</p><div class="shot"><div class="scr"><img src="app-handoff.jpg" alt="Phone showing Bubbles' booking summary" loading="lazy" width="600" height="1301"><span class="ring" style="left:14%;top:45.5%;width:82%;height:41.9%"></span></div></div></article>
+        <article class="j-card"><div class="top"><span class="step-art"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#ico-s3"/></svg></span><div><small>Step 3</small><h3>Check items and price</h3></div></div><p>Add or remove items and the total updates as you go.</p><p class="look"><span></span>Total updates live</p><div class="shot"><div class="scr"><img src="select.webp" alt="Phone showing the select items screen" loading="lazy" width="600" height="1301"><span class="ring" style="left:3%;top:85.8%;width:94%;height:11.6%"></span></div></div></article>
+        <article class="j-card"><div class="top"><span class="step-art"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#ico-s4"/></svg></span><div><small>Step 4</small><h3>Pick a pickup time</h3></div></div><p>Choose a two-hour window. Pickup, delivery and address in one place.</p><p class="look"><span></span>Your pickup window</p><div class="shot"><div class="scr"><img src="app-confirmed.jpg" alt="Phone showing the booking confirmation" loading="lazy" width="600" height="1301"><span class="ring" style="left:5.1%;top:26.5%;width:89.8%;height:30.5%"></span></div></div></article>
+        <article class="j-card"><div class="top"><span class="step-art"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#ico-s5"/></svg></span><div><small>Step 5</small><h3>Follow it to your door</h3></div></div><p>See each stage, your rider's name and a pickup code. Call the rider or ask Bubbles any time.</p><p class="look"><span></span>Your rider</p><div class="shot"><div class="scr"><img src="app-tracking.jpg" alt="Phone showing order tracking with the rider card and pickup code" loading="lazy" width="600" height="1301"><span class="ring" style="left:5.1%;top:18.5%;width:89.8%;height:29.3%"></span></div></div></article>
+      </div>
+      <div class="j-nav"><button class="jn prev" type="button" aria-label="Previous step"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button><div class="j-dots" id="jDots"><button type="button" aria-label="Step 1" class="on" aria-current="true"></button><button type="button" aria-label="Step 2"></button><button type="button" aria-label="Step 3"></button><button type="button" aria-label="Step 4"></button><button type="button" aria-label="Step 5"></button></div><button class="jn next" type="button" aria-label="Next step"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg></button></div>
+    </div>
+  </div>
+</section>
+
+<section id="help" aria-labelledby="hTitle">
+  <div class="wrap help-grid">
+    <div class="help-copy">
+      <h2 class="sec-title" id="hTitle">Four jobs, done well. Not an open-ended chatbot.</h2>
+      <p>Bubbles does a few things and says so when you ask for something else. Anything that costs money waits for you to confirm.</p>
+      <p class="wont"><b>Bubbles won't</b> pay or confirm a booking for you, guess prices for laundries it doesn't list, or decide a damage claim. Those stay with you and the laundry.</p>
+    </div>
+    <div class="chat" aria-label="Example chat with Bubbles">
+      <div class="chat-head"><img src="avatar.webp" alt=""><div><b>Bubbles</b><small>Helper in the Easy Laundry app</small></div></div>
+      <div class="msgs" id="msgs" aria-live="polite">
+        <div class="msg bot">Hi, I'm Bubbles. I can book a pickup, check prices, track an order or help with a stain. Pick a question below.</div>
+      </div>
+      <div class="asks" id="chips">
+        <button type="button" data-q="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="13" height="10" rx="2"/><path d="M15 10h4l3 3v4h-7"/><circle cx="7" cy="18" r="1.6"/><circle cx="18" cy="18" r="1.6"/></svg>Book a pickup</button>
+        <button type="button" data-q="1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12l-8 8-9-9V3h8z"/><circle cx="7.5" cy="7.5" r="1.4"/></svg>Check prices</button>
+        <button type="button" data-q="2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></svg>Track an order</button>
+        <button type="button" data-q="3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Care advice</button>
+        <button type="button" data-q="4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .8-1 1.6"/><circle cx="12" cy="16.8" r=".9" fill="currentColor"/></svg>Ask something else</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="prices" aria-labelledby="prTitle">
+  <div class="wrap">
+    <div class="pr-head">
+      <h2 class="sec-title" id="prTitle">See the price before you book.</h2>
+      <p>Four services, each with a starting price. Tap Estimate this, add items and pick a pickup slot.</p>
+    </div>
+    <div class="rail"><div class="tags">
+      <div class="tag"><span class="peg"></span><div class="label"><span class="hole"></span>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="4" y="2.5" width="16" height="19" rx="3"/><circle cx="12" cy="13.5" r="4.5"/><path d="M7 6h3"/></svg></div>
+        <div class="txt"><h3>Wash &amp; Fold</h3><p>Washed, dried and folded.</p>
+        <p class="good"><b>Good for:</b> T-shirts, jeans and everyday clothes</p></div>
+        <div class="rate"><span class="pr">From <b>₹40</b> / kg</span><span class="eta">Usually 24 h</span></div>
+        <a class="est-link" href="#est" data-est="fold">Estimate this</a></div></div>
+      <div class="tag"><span class="peg"></span><div class="label"><span class="hole"></span>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6l1 3 4 2-2 4-2-1v10H8V11l-2 1-2-4 4-2z"/></svg></div>
+        <div class="txt"><h3>Dry Clean</h3><p>For fabrics that can't go in a machine.</p>
+        <p class="good"><b>Good for:</b> Suits, blazers and silk</p></div>
+        <div class="rate"><span class="pr">From <b>₹60</b> / piece</span><span class="eta">Usually 48 h</span></div>
+        <a class="est-link" href="#est" data-est="dry">Estimate this</a></div></div>
+      <div class="tag"><span class="peg"></span><div class="label"><span class="hole"></span>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 7.5l8 4.5 8-4.5z"/><path d="m4 12 8 4.5 8-4.5"/><path d="m4 16.5 8 4.5 8-4.5"/></svg></div>
+        <div class="txt"><h3>Steam Press</h3><p>Steamed on a hanger. Gentle on formal fabrics.</p>
+        <p class="good"><b>Good for:</b> Office shirts, trousers and sarees</p></div>
+        <div class="rate"><span class="pr">From <b>₹20</b> / piece</span><span class="eta">Usually 24 h</span></div>
+        <a class="est-link" href="#est" data-est="press">Estimate this</a></div></div>
+      <div class="tag"><span class="peg"></span><div class="label"><span class="hole"></span>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M3 17h16a2 2 0 0 0 2-2c0-4-3-7-8-7H9"/><path d="M3 17c0-3 2-6 6-6"/><path d="M8 20h10"/></svg></div>
+        <div class="txt"><h3>Ironing</h3><p>Pressed flat with an iron, then folded.</p>
+        <p class="good"><b>Good for:</b> Clothes you've washed at home</p></div>
+        <div class="rate"><span class="pr">From <b>₹15</b> / piece</span><span class="eta">Usually 24 h</span></div>
+        <a class="est-link" href="#est" data-est="iron">Estimate this</a></div></div>
+    </div></div>
+    <p class="sv-more">Shoe laundry and curtain cleaning are booked the same way. Each laundry lists its own prices for them.</p>
+    <div class="est" id="est">
+      <div class="est-main">
+        <div class="tabs" role="tablist" aria-label="Service">
+          <button type="button" role="tab" aria-selected="true" tabindex="0" data-svc="press">Steam Press</button>
+          <button type="button" role="tab" aria-selected="false" tabindex="-1" data-svc="fold">Wash &amp; Fold</button>
+          <button type="button" role="tab" aria-selected="false" tabindex="-1" data-svc="dry">Dry Clean</button>
+          <button type="button" role="tab" aria-selected="false" tabindex="-1" data-svc="iron">Ironing</button>
+          <button type="button" role="tab" aria-selected="false" tabindex="-1" data-svc="shoe">Shoes</button>
+          <button type="button" role="tab" aria-selected="false" tabindex="-1" data-svc="curtain">Curtains</button>
+        </div>
+        <div class="prov"><span class="prov-name">CleanCare Laundry</span><span class="prov-meta"><span aria-hidden="true">★</span> 4.6 · 1.2 km</span></div>
+        <div class="est-opts"><p class="est-note" id="estNote">Priced per piece.</p><label class="first"><input type="checkbox" id="firstOrder" checked><span>First order: 20% off items</span></label></div>
+        <ul class="items" id="items"></ul>
+        <fieldset class="slot" id="slot"><legend>Pickup slot</legend>
+          <div class="slot-row"><label class="pill"><input type="radio" name="pday" value="today"><span>Today</span></label><label class="pill"><input type="radio" name="pday" value="tomorrow" checked><span>Tomorrow</span></label><label class="pill"><input type="radio" name="pday" value="on Saturday"><span>Saturday</span></label></div>
+          <div class="slot-row"><label class="pill"><input type="radio" name="pwin" value="9 to 11 AM" checked><span>9–11 AM</span></label><label class="pill"><input type="radio" name="pwin" value="1 to 3 PM"><span>1–3 PM</span></label><label class="pill"><input type="radio" name="pwin" value="5 to 7 PM"><span>5–7 PM</span></label></div>
+        </fieldset>
+      </div>
+      <div class="est-side" aria-live="polite">
+        <span class="lbl">Estimated total</span>
+        <div class="total" id="estTotal">₹114</div>
+        <div class="count"><span id="estCount">5 items · Steam Press</span><span class="fine" id="estFine">Incl. ₹10 pickup and delivery, 20% off items</span></div>
+        <dl class="bill" id="bill"></dl>
+        <p class="slot-line" id="slotLine">Pickup tomorrow, 9 to 11 AM</p>
+        <a class="next" href="#journey" id="estNext">See how booking works <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="why" aria-labelledby="wTitle">
+  <div class="wrap track-wrap">
+    <div class="tracker-intro">
+      <h2 id="wTitle">Then follow it to your door.</h2>
+      <p>Every stage shows up on the order screen, so you never have to message the laundry to ask. Tap a stage to see what you'd be told.</p>
+    </div>
+    <div class="tracker">
+      <ol class="stages" id="stages"><li><button type="button"><span class="dot"></span><span class="nm">Picked up</span><time>Wed, 9:52 AM</time></button></li><li><button type="button"><span class="dot"></span><span class="nm">At the laundry</span><time>Wed, 10:40 AM</time></button></li><li><button type="button"><span class="dot"></span><span class="nm">Pressing</span><time>Wed, 2:10 PM</time></button></li><li><button type="button"><span class="dot"></span><span class="nm">Out for delivery</span><time>Thu, 9:20 AM</time></button></li><li><button type="button"><span class="dot"></span><span class="nm">Delivered</span><time>Thu, 10:05 AM</time></button></li></ol>
+      <div class="stage-detail" id="stageDetail" aria-live="polite"></div>
+      <button class="btn btn-light" type="button" id="stageNext">Next stage</button>
+    </div>
+  </div>
+</section>
+
+<section id="faq" aria-labelledby="fTitle">
+  <div class="wrap faq-grid">
+    <div>
+      <h2 class="sec-title" id="fTitle">Questions about booking.</h2>
+    </div>
+    <div class="qa" id="qa">
+      <details open><summary>How can I pay?<i aria-hidden="true"></i></summary><p>In the app by UPI, card or net banking, or choose cash on delivery and pay when your clothes come back.</p></details>
+      <details><summary>Why not just message my laundry on WhatsApp?<i aria-hidden="true"></i></summary><p>You can, and many people do. The app adds what a chat can't: a price for each item before you book, a fixed two-hour pickup window, every stage on one screen, and a photo of each item at pickup.</p></details>
+      <details><summary>Do I have to use Bubbles?<i aria-hidden="true"></i></summary><p>No. You can also pick a service and a laundry yourself. Each laundry's page shows its rating, distance and prices before you add items.</p></details>
+      <details><summary>What if something goes wrong with my clothes?<i aria-hidden="true"></i></summary><p>You report it from the order screen, and the pickup photos are attached for you. The order stays open until the laundry responds. Compensation amounts would be agreed with each laundry before launch.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="closing" aria-labelledby="cTitle">
+  <div class="wrap close-grid">
+    <div class="close-copy">
+      <h2 id="cTitle">See you at the door.</h2>
+      <p>One message to Bubbles, and your clothes come back clean and folded.</p>
+      <div class="close-cta"><a class="btn btn-light" href="#prices">Get a price estimate</a><a class="btn btn-line" data-link="prototype" hidden><span class="cb-long">Try the prototype</span><span class="cb-short">Prototype</span></a><a class="btn btn-line" data-link="caseStudy" hidden><span class="cb-long">Read the case study</span><span class="cb-short">Case study</span></a></div>
+    </div>
+    <div class="close-art">
+      <div class="floor"></div>
+      <img class="close-photo" src="photo-close.jpg" alt="A person holding a stack of freshly folded shirts" width="1000" height="667" loading="lazy">
+      <svg class="close-bag" viewBox="0 0 240 280" aria-hidden="true"><ellipse cx="118" cy="268" rx="104" ry="10" fill="rgba(0,0,0,.4)"/><rect x="96" y="44" width="92" height="44" rx="10" fill="#BFE7E3"/><rect x="50" y="56" width="98" height="40" rx="10" fill="#F8F3EA"/><rect x="70" y="72" width="112" height="32" rx="10" fill="#1F9C8F"/><path d="M70 98C70 30 112 30 112 98" fill="none" stroke="#0F6F6D" stroke-width="9" stroke-linecap="round"/><path d="M128 98C128 30 170 30 170 98" fill="none" stroke="#0F6F6D" stroke-width="9" stroke-linecap="round"/><path d="M32 94H206L196 262H42Z" fill="#E9D8CD"/><path d="M32 94H206L205 112H33Z" fill="#DCC6B6"/><path d="M40 240H198" stroke="#DCC6B6" stroke-width="3"/><use href="#logo" x="88" y="128" width="62" height="62"/><text x="119" y="220" text-anchor="middle" font-family="Crimson Text, Georgia, serif" font-weight="700" font-size="23" fill="#0F6F6D">Easy Laundry</text><path d="M168 62C176 82 186 98 196 112" fill="none" stroke="#8a6f5c" stroke-width="1.6"/><g transform="rotate(14 206 146)"><rect x="178" y="110" width="58" height="74" rx="8" fill="#F8F3EA"/><circle cx="207" cy="121" r="4.5" fill="#DCC6B6"/><text x="207" y="148" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="12" fill="#0F6F6D">#1024</text><text x="207" y="166" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10.5" fill="#5B6168">5 items</text></g></svg>
+    </div>
+  </div>
+</section>
+</main>
+<footer>
+  <div class="wrap"><div class="big" aria-hidden="true">Easy <b>Laundry</b></div>
+  <p class="tagline">Clean clothes, happier days.</p>
+  <div class="row"><span>Designed by Om Mangrulkar</span><span>Easy Laundry is a concept app. Laundries, prices and orders shown are sample data. <a data-link="caseStudy" hidden>Read the case study</a> <a data-link="prototype" hidden>Prototype</a></span></div></div>
+</footer>
+
+
+
+<script>
+(function(){
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* ---------- header + menu ---------- */
+const header=document.getElementById('top'), brandUse=document.getElementById('brandUse');
+function onHeader(){
+  // colour follows whatever section is actually visible under the header
+  let dark=false; const x=innerWidth/2, y=header.offsetHeight-6;
+  const stack=document.elementsFromPoint(x,y);
+  for (const el of stack){ if (header.contains(el) || el.closest('#menuSheet')) continue; const sec=el.closest('section[id], footer'); if(sec){ dark = sec.id==='hero' || sec.id==='closing' || sec.id==='why' || sec.tagName==='FOOTER'; break; } }
+  header.classList.toggle('dark',dark); header.classList.toggle('solid',scrollY>24);
+  brandUse.setAttribute('href',dark?'#logo-rev':'#logo');
+}
+let hq=false; const qHeader=()=>{ if(hq) return; hq=true; requestAnimationFrame(()=>{ hq=false; onHeader(); }); };
+addEventListener('scroll',qHeader,{passive:true}); addEventListener('resize',qHeader); onHeader();
+/* Paste links here and the closing section shows a button for each; empty links stay hidden */
+const LINKS={ prototype:'https://www.figma.com/proto/BiZ3TffBXTSHCCWhZDNHqG/td?node-id=325-7701&scaling=scale-down&content-scaling=fixed&starting-point-node-id=325%3A7701&show-proto-sidebar=1&page-id=188%3A4236', caseStudy:'https://www.figma.com/design/BiZ3TffBXTSHCCWhZDNHqG/td?node-id=326-10874' };
+document.querySelectorAll('[data-link]').forEach(a=>{ const u=LINKS[a.dataset.link]; if(u){ a.href=u; a.target='_blank'; a.rel='noopener'; a.hidden=false; } });
+const menuBtn=document.getElementById('menuBtn'), sheet=document.getElementById('menuSheet');
+function setMenu(open){ sheet.classList.toggle('open',open); menuBtn.setAttribute('aria-expanded',open); menuBtn.setAttribute('aria-label',open?'Close menu':'Open menu'); }
+menuBtn.addEventListener('click',()=>setMenu(!sheet.classList.contains('open')));
+sheet.addEventListener('click',e=>{ if(e.target.closest('a')) setMenu(false); });
+addEventListener('keydown',e=>{ if(e.key==='Escape') setMenu(false); });
+
+/* ================= HERO: a sentence becomes a booking ================= */
+const demo=document.getElementById('demo');
+if (demo){
+  const $=id=>document.getElementById(id);
+  const typed=$('dType'), body=demo.querySelector('.dc-body'), form=$('dAsk'), field=$('dAskInput'), send=form.querySelector('button');
+  let timers=[]; const later=(fn,ms)=>timers.push(setTimeout(fn,ms));
+  function play(text,greet){
+    timers.forEach(clearTimeout); timers=[];
+    $('dTypeSr').textContent='You: '+text;
+    if (reduce){ typed.textContent=text; demo.classList.remove('hide','think','typing-now','nohello','nome','busy'); return; }
+    body.style.minHeight=''; body.style.minHeight=body.offsetHeight+'px';
+    send.disabled=true; demo.classList.add('busy','hide'); demo.classList.remove('think','typing-now'); typed.textContent='';
+    if (greet){ demo.classList.add('nohello','nome'); later(()=>demo.classList.remove('nohello'),250); }
+    let i=0;
+    const type=()=>{ typed.textContent=text.slice(0,++i);
+      if (i<text.length) return later(type, 22+Math.random()*30);
+      later(()=>{ demo.classList.remove('typing-now'); demo.classList.add('think'); },300);
+      later(()=>{ demo.classList.remove('think'); void demo.offsetWidth; demo.classList.remove('hide'); later(()=>{ send.disabled=false; demo.classList.remove('busy'); },900); },1300);
+    };
+    later(()=>{ demo.classList.remove('nome'); demo.classList.add('typing-now'); type(); }, greet?1300:350);
+  }
+  const NUM={a:1,an:1,one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10};
+  const ITEM=[['T-shirt','t-?shirts?|tees?'],['Shirt','shirts?'],['Jeans','jeans'],['Trousers','trousers|pants'],['Saree','sarees?|saris?'],['Bedsheet','bed ?sheets?|sheets?'],['Blazer','blazers?|jackets?'],['Suit, 2 piece','suits?'],['Sneakers','sneakers?|shoes?'],['Curtain panel','curtains?|drapes?']];
+  const ONE={'Jeans':'pair of jeans','Trousers':'pair of trousers','Suit, 2 piece':'2-piece suit'}, MANY={'Jeans':'jeans','Trousers':'trousers','Suit, 2 piece':'2-piece suits','Sneakers':'pairs of shoes','Curtain panel':'curtain panels'};
+  ONE['Sneakers']='pair of shoes'; ONE['Curtain panel']='curtain panel';
+  const SVC_NAME={press:'Steam Press',fold:'Wash & Fold',dry:'Dry Clean',iron:'Ironing',shoe:'Shoe Laundry',curtain:'Curtain Cleaning'};
+  /* forgive small typos: "shrits" -> "shirts", "jeens" -> "jeans", "tommorow" -> "tomorrow" */
+  const WORDS=['shirt','shirts','tshirt','tshirts','t-shirt','t-shirts','tees','jeans','trousers','pants','saree','sarees','sari','saris','bedsheet','bedsheets','sheets','blazer','blazers','jacket','jackets','suit','suits','pair','pairs','dry','clean','cleaning','iron','ironing','wash','fold','steam','pressed','press','today','tomorrow','monday','tuesday','wednesday','thursday','friday','saturday','sunday','morning','afternoon','evening','night'];
+  function lev(a,b){ const m=a.length,n=b.length; if(Math.abs(m-n)>2) return 9; let pp=null, prev=[...Array(n+1).keys()];
+    for(let i=1;i<=m;i++){ const cur=[i]; for(let j=1;j<=n;j++){ cur[j]=Math.min(prev[j]+1,cur[j-1]+1,prev[j-1]+(a[i-1]===b[j-1]?0:1));
+      if(pp&&j>1&&a[i-1]===b[j-2]&&a[i-2]===b[j-1]) cur[j]=Math.min(cur[j],pp[j-2]+1); } pp=prev; prev=cur; } return prev[n]; }
+  function fix(text){ return text.replace(/[a-z-]{4,}/g,w=>{ if(WORDS.includes(w)) return w; let best=w,bd=w.length>=7?2:1;
+    for(const c of WORDS){ const d=lev(w,c); if(d<=bd){ bd=d; best=c; if(d===1&&w.length<7) break; } } return best; }); }
+  function read(text){
+    const t=' '+fix(text.toLowerCase())+' ';
+    const svc=/shoe|sneaker/.test(t)?'shoe':/curtain|drape/.test(t)?'curtain':/dry[ -]?clean/.test(t)?'dry':/\biron/.test(t)?'iron':/wash|fold|\bkg\b|kilo/.test(t)?'fold':'press';
+    const day=(t.match(/\b(today|tomorrow|monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b/)||[0,'tomorrow'])[1];
+    const win=/evening|night/.test(t)?'5 to 7 PM':/afternoon/.test(t)?'1 to 3 PM':'9 to 11 AM';
+    const got=[], missing=[];
+    if (svc==='fold'){ const m=t.match(/(\d+(?:\.\d+)?)\s*(?:kg|kilo)/); const kg=m?Math.max(1,Math.min(20,Math.round(+m[1]))):3; got.push([kg+' kg of everyday clothes', kg*40]); }
+    else {
+      let rest=t;
+      for (const [name,src] of ITEM){
+        const re=new RegExp('(?:\\b(\\d+|'+Object.keys(NUM).join('|')+')\\s+)?(?:pairs? of\\s+)?\\b(?:'+src+')\\b','g');
+        let m; while((m=re.exec(rest))){
+          const n=Math.min(20, m[1]?(/\d/.test(m[1])?+m[1]:NUM[m[1]]):1), it=SVC[svc].items.find(x=>x[0]===name); if(!n) continue;
+          if (it){ const k=got.findIndex(g=>g[2]===name); const tot=(k>-1?got[k][3]:0)+n, lab=tot+' '+(tot===1?(ONE[name]||name.toLowerCase()):(MANY[name]||name.toLowerCase()+'s')); if(k>-1) got[k]=[lab,it[1]*tot,name,tot]; else got.push([lab,it[1]*tot,name,tot]); }
+          else if (!missing.includes(name.toLowerCase())) missing.push(name.toLowerCase());
+        }
+        rest=rest.replace(re,' ');
+      }
+    }
+    return {svc,day,win,got,missing};
+  }
+  form.addEventListener('submit',e=>{ e.preventDefault();
+    const text=field.value.trim(); if(!text){ field.focus(); return; }
+    const r=read(text), say=$('dSay');
+    if (!r.got.length){
+      demo.classList.add('noitems');
+      say.textContent = /carpet|rug|sofa|mattress/i.test(text) ? "We don’t clean carpets yet, sorry. Try shirts, jeans, sarees or bedsheets." : r.missing.length ? "CleanCare Laundry doesn't list "+r.missing.join(' or ')+" for "+SVC_NAME[r.svc]+". Try another service, like dry clean." : "I couldn't find any clothes in that. Try something like: 2 shirts and a saree, steam pressed, Saturday evening.";
+    } else {
+      demo.classList.remove('noitems');
+      const items=r.got.reduce((a,g)=>a+g[1],0), off=Math.round(items*.2);
+      say.textContent = r.missing.length ? "Done. I left out "+r.missing.join(' and ')+" (not offered for "+SVC_NAME[r.svc]+"). Here's your booking to check:" : "Done. Here's your booking to check:";
+      $('dSvc').textContent=SVC_NAME[r.svc]; $('dItems').textContent=r.got.map(g=>g[0]).join(', ');
+      $('dWhen').textContent=r.day.charAt(0).toUpperCase()+r.day.slice(1)+', '+r.win;
+      $('dTotal').textContent='₹'+(items-off+10); $('dFine').textContent='₹'+items+' items − ₹'+off+' first-order discount + ₹10 pickup';
+    }
+    play(text); field.value='';
+  });
+  demo.querySelectorAll('[data-try]').forEach(b=>b.addEventListener('click',()=>{ field.value=b.dataset.try; form.requestSubmit(); }));
+  play(typed.textContent,true);
+}
+
+/* ================= JOURNEY ================= */
+const steps=[...document.querySelectorAll('.step')], stageImgs=[...document.querySelectorAll('#jStage img')];
+let active=0;
+const stageCos=[...document.querySelectorAll('#jStage .hl')];
+function setStep(i){ if(i===active) return; active=i; steps.forEach((s,k)=>s.classList.toggle('on',k===i)); stageImgs.forEach((im,k)=>im.classList.toggle('on',k===i)); stageCos.forEach((c,k)=>c.classList.toggle('on',k===i)); }
+const deskJ=matchMedia('(min-width:1024px) and (min-height:600px)');
+steps.forEach((s,i)=>s.querySelector('.step-btn').addEventListener('click',()=>{ setStep(i); if(deskJ.matches) s.scrollIntoView({block:'center',behavior:reduce?'auto':'smooth'}); }));
+if ('IntersectionObserver' in window){
+  const jIO=new IntersectionObserver(es=>{ if(!deskJ.matches) return; es.forEach(e=>{ if(e.isIntersecting) setStep(steps.indexOf(e.target)); }); },{rootMargin:'-45% 0px -45% 0px'});
+  steps.forEach(s=>jIO.observe(s));
+}
+const cards=document.getElementById('jCards'), dots=[...document.querySelectorAll('#jDots button')], jPrev=document.querySelector('.j-nav .prev'), jNext=document.querySelector('.j-nav .next');
+let cardIdx=0;
+function cardTo(i){ const el=cards.children[i]; if(!el) return; cards.scrollTo({left:el.offsetLeft-cards.offsetLeft-parseFloat(getComputedStyle(cards).paddingLeft)+cards.scrollLeft*0, behavior:reduce?'auto':'smooth'}); }
+function cardState(){ const c=[...cards.children]; let best=0,bd=1e9; const left=cards.getBoundingClientRect().left+parseFloat(getComputedStyle(cards).paddingLeft);
+  c.forEach((el,i)=>{ const d=Math.abs(el.getBoundingClientRect().left-left); if(d<bd){bd=d;best=i;} });
+  if (cards.scrollLeft+cards.clientWidth>=cards.scrollWidth-4) best=c.length-1;
+  cardIdx=best; dots.forEach((d,i)=>{ d.classList.toggle('on',i===best); if(i===best) d.setAttribute('aria-current','true'); else d.removeAttribute('aria-current'); });
+  jPrev.disabled=best===0; jNext.disabled=best===c.length-1; }
+cards.addEventListener('scroll',cardState,{passive:true}); cardState();
+dots.forEach((d,i)=>d.addEventListener('click',()=>cardTo(i)));
+jPrev.addEventListener('click',()=>cardTo(Math.max(0,cardIdx-1))); jNext.addEventListener('click',()=>cardTo(Math.min(4,cardIdx+1)));
+
+/* ================= PRICE ESTIMATE (sample rates from the prototype) ================= */
+const SVC={
+  press:{name:'Steam Press', note:'Priced per piece.', unit:'piece', items:[['Shirt',20,2],['T-shirt',20,0],['Jeans',25,0],['Trousers',25,2],['Saree',40,1],['Bedsheet',30,0]]},
+  fold:{name:'Wash & Fold', note:'Priced by weight.', unit:'kg', items:[['Everyday clothes',40,3]]},
+  dry:{name:'Dry Clean', note:'Priced per piece.', unit:'piece', items:[['Shirt',60,0],['Trousers',70,0],['Saree',120,0],['Blazer',180,1],['Suit, 2 piece',300,0]]},
+  iron:{name:'Ironing', note:'Priced per piece.', unit:'piece', items:[['Shirt',15,4],['T-shirt',15,0],['Trousers',15,2],['Saree',30,0],['Bedsheet',20,0]]},
+  shoe:{name:'Shoe Laundry', note:'Priced per pair. Back in 72 hours.', unit:'pair', items:[['Sneakers',120,1],['Canvas shoes',120,0]]},
+  curtain:{name:'Curtain Cleaning', note:'Priced per panel. Back in 72 hours.', unit:'panel', items:[['Curtain panel',150,2],['Sheer drape',150,0]]}
+};
+let svc='press';
+const PICKUP=10, FIRST_OFF=.2, firstEl=document.getElementById('firstOrder'), fineEl=document.getElementById('estFine'), billEl=document.getElementById('bill'); const itemsEl=document.getElementById('items'), totalEl=document.getElementById('estTotal'), countEl=document.getElementById('estCount'), noteEl=document.getElementById('estNote');
+function renderItems(){
+  const d=SVC[svc]; noteEl.textContent=d.note;
+  itemsEl.innerHTML=d.items.map((it,i)=>'<li><div class="nm"><b>'+it[0]+'</b><span>₹'+it[1]+' / '+d.unit+'</span></div><div class="qty"><button class="minus" type="button" data-i="'+i+'" data-d="-1" aria-label="Fewer '+it[0]+'">−</button><output aria-label="'+it[0]+' quantity">'+it[2]+(d.unit==='kg'?' kg':'')+'</output><button class="plus" type="button" data-i="'+i+'" data-d="1" aria-label="More '+it[0]+'">+</button></div></li>').join('');
+  update(false);
+}
+function update(anim){
+  const d=SVC[svc]; let total=0, n=0;
+  d.items.forEach(it=>{ total+=it[1]*it[2]; n+=it[2]; });
+  itemsEl.querySelectorAll('li').forEach((li,i)=>{ li.querySelector('.minus').disabled=d.items[i][2]<=0; li.querySelector('.plus').disabled=d.items[i][2]>=20; });
+  const first=firstEl.checked, off=first?Math.round(total*FIRST_OFF):0, grand = total>0 ? total+PICKUP-off : 0;
+  totalEl.textContent='₹'+grand;
+  countEl.textContent=(d.unit==='kg'? n+' kg' : n+(n===1?' item':' items'))+' · '+d.name;
+  const rows=d.items.filter(it=>it[2]>0).map(it=>'<dt>'+it[0]+(d.unit==='kg'?' · '+it[2]+' kg':' × '+it[2])+'</dt><dd>₹'+(it[1]*it[2])+'</dd>').join('');
+  billEl.innerHTML = total>0 ? rows+'<span class="sep"></span><dt>Items</dt><dd>₹'+total+'</dd><dt>Pickup and delivery</dt><dd>₹'+PICKUP+'</dd>'+(first?'<dt>First order, 20% off items</dt><dd>−₹'+off+'</dd>':'')+'<span class="sep"></span><dt class="tot">You pay</dt><dd class="tot">₹'+grand+'</dd>' : '<dt>Add an item to see the total.</dt><dd></dd>';
+  fineEl.textContent = first ? 'Incl. ₹10 pickup and delivery, 20% off items' : 'Incl. ₹10 pickup and delivery';
+  if(anim && !reduce){ totalEl.classList.remove('pop'); void totalEl.offsetWidth; totalEl.classList.add('pop'); }
+}
+itemsEl.addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b||b.disabled) return; const it=SVC[svc].items[+b.dataset.i];
+  it[2]=Math.max(0,Math.min(20,it[2]+(+b.dataset.d))); b.parentElement.querySelector('output').textContent=it[2]+(SVC[svc].unit==='kg'?' kg':''); update(true); });
+const tabBtns=[...document.querySelectorAll('.tabs button')];
+function pickTab(t,focus){ svc=t.dataset.svc; tabBtns.forEach(x=>{ x.setAttribute('aria-selected',x===t); x.tabIndex = x===t?0:-1; }); if(focus) t.focus(); renderItems(); }
+tabBtns.forEach((t,i)=>{ t.addEventListener('click',()=>pickTab(t)); t.addEventListener('keydown',e=>{ if(e.key==='ArrowRight'||e.key==='ArrowLeft'){ e.preventDefault(); pickTab(tabBtns[(i+(e.key==='ArrowRight'?1:-1)+tabBtns.length)%tabBtns.length],true); } }); });
+document.getElementById('estNext').addEventListener('click',()=>{ setStep(2); const c=document.getElementById('jCards'); if(c.offsetParent && c.children[2]) setTimeout(()=>c.scrollTo({left:c.children[2].offsetLeft-c.offsetLeft-20,behavior:reduce?'auto':'smooth'}),400); });
+renderItems();
+firstEl.addEventListener('change',()=>update(true));
+document.querySelectorAll('[data-est]').forEach(a=>a.addEventListener('click',()=>{ const t=tabBtns.find(b=>b.dataset.svc===a.dataset.est); if(t) pickTab(t); }));
+const slotLine=document.getElementById('slotLine');
+function slotText(){ const d=document.querySelector('input[name=pday]:checked'), w=document.querySelector('input[name=pwin]:checked'); slotLine.textContent='Pickup '+d.value+', '+w.value; }
+document.getElementById('slot').addEventListener('change',slotText); slotText();
+
+/* ================= TRACKER ================= */
+const STAGE_TXT=[
+  'The rider counted 5 items at your door and saved 5 photos to your order.',
+  'CleanCare Laundry checked your items against the pickup photos.',
+  'Your 3 shirts and 2 jeans are being steam pressed.',
+  'Arriving between 5 and 7 PM. You can call the rider from the order screen.',
+  'Delivered. Check your items against the pickup photos, then rate the laundry.'
+];
+const stageLis=[...document.querySelectorAll('#stages li')], stageDetail=document.getElementById('stageDetail'), stageNext=document.getElementById('stageNext');
+let stageNow=2;
+function setStage(i){ stageNow=i;
+  stageLis.forEach((li,k)=>{ li.classList.toggle('done',k<i || (i===stageLis.length-1 && k===i)); li.classList.toggle('now',k===i && i<stageLis.length-1); li.classList.toggle('later',k>i);
+    const b=li.querySelector('button'); if(k===i) b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current'); });
+  stageDetail.innerHTML='<b></b>'; stageDetail.firstChild.textContent=stageLis[i].querySelector('.nm').textContent+' · '+stageLis[i].querySelector('time').textContent;
+  stageDetail.appendChild(document.createTextNode(STAGE_TXT[i]));
+  stageNext.textContent = i===stageLis.length-1 ? 'Start over' : 'Next stage';
+}
+stageLis.forEach((li,i)=>li.querySelector('button').addEventListener('click',()=>setStage(i)));
+stageNext.addEventListener('click',()=>setStage(stageNow===stageLis.length-1?0:stageNow+1));
+setStage(2);
+
+/* ================= TAGS: one gentle swing when they come into view ================= */
+if (!reduce && 'IntersectionObserver' in window){
+  const tagIO=new IntersectionObserver(es=>es.forEach(e=>{ if(!e.isIntersecting) return; const t=e.target, i=[...t.parentNode.children].indexOf(t);
+    t.style.animationDelay=(innerWidth<600?0:i*0.12)+'s'; t.classList.add('swing'); tagIO.unobserve(t); }),{threshold:.6});
+  document.querySelectorAll('.tag').forEach(t=>tagIO.observe(t));
+}
+/* every tag also swings when you point at it or tap it, so they all behave the same */
+function swingTag(t){ if(reduce) return; t.style.animationDelay='0s'; t.classList.remove('swing'); void t.offsetWidth; t.classList.add('swing'); }
+document.querySelectorAll('.tag').forEach(t=>{
+  t.addEventListener('pointerenter',e=>{ if(e.pointerType==='mouse' && !t.classList.contains('busy')) swingTag(t); });
+  t.addEventListener('click',()=>swingTag(t));
+  t.addEventListener('animationstart',()=>t.classList.add('busy')); t.addEventListener('animationend',()=>t.classList.remove('busy'));
+});
+
+/* ================= WASHING LINE: one swing when it comes into view ================= */
+const washLine=document.querySelector('.wash-line');
+if (washLine && !reduce && 'IntersectionObserver' in window){
+  const lineIO=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ washLine.classList.add('go'); lineIO.disconnect(); } }),{threshold:.6});
+  lineIO.observe(washLine);
+}
+
+/* ================= FAQ: one open at a time ================= */
+const qa=[...document.querySelectorAll('#qa details')];
+qa.forEach(d=>d.addEventListener('toggle',()=>{ if(d.open) qa.forEach(o=>{ if(o!==d) o.open=false; }); }));
+
+/* ================= CHAT ================= */
+const QA=[
+  ['Book a pickup: 3 shirts, steam pressed, tomorrow morning',"Done: Steam Press at CleanCare Laundry, 3 shirts, pickup tomorrow between 9 and 11 AM. That's ₹60 for the shirts, minus ₹12 first-order discount, plus ₹10 pickup: ₹58. Check it and tap Confirm when you're happy."],
+  ['How much is steam pressing?',"At CleanCare Laundry it's ₹20 a shirt, ₹25 for jeans or trousers and ₹40 for a saree. Pickup and delivery add ₹10 per order. Other laundries may charge differently."],
+  ['Where is my order?',"Order #1024 is being steam pressed at CleanCare Laundry. It should be out for delivery tomorrow morning, and I'll tell you when the rider leaves."],
+  ['I spilled coffee on a white shirt.',"Blot it, don't rub, and rinse it from the back with cold water. If the stain has set, add a note to your order so the laundry treats it first."],
+  ["What's the weather tomorrow?","That one's outside what I do. I can book a pickup, check prices, track an order or help with a stain."]
+];
+const msgs=document.getElementById('msgs'), chips=document.getElementById('chips'); let busy=false;
+chips.addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b||busy) return; busy=true; chips.querySelectorAll('button').forEach(x=>x.disabled=true);
+  const [q,a]=QA[+b.dataset.q]; add('me',q);
+  const ty=document.createElement('div'); ty.className='msg bot typing'; ty.innerHTML='<i></i><i></i><i></i>'; ty.setAttribute('aria-label','Bubbles is typing'); msgs.appendChild(ty); msgs.scrollTop=msgs.scrollHeight;
+  setTimeout(()=>{ ty.remove(); add('bot',a); busy=false; chips.querySelectorAll('button').forEach(x=>x.disabled=false); }, reduce?150:1100); });
+function add(w,t){ const d=document.createElement('div'); d.className='msg new '+w; d.textContent=t; msgs.appendChild(d); msgs.scrollTop=msgs.scrollHeight; }
+
+addEventListener('load',onHeader);
+})();
+</script>
+</body>
+</html>
+
+</body></html>
