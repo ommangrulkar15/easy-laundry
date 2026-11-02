@@ -1,4 +1,3 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <!doctype html>
 <html lang="en">
 <head>
@@ -46,11 +45,14 @@ p{margin:0}
 a{color:inherit}
 button{font:inherit;cursor:pointer;color:inherit}
 :focus-visible{outline:3px solid var(--fresh);outline-offset:3px;border-radius:8px}
+/* on teal surfaces the fresh-teal ring fades into the background (1.8:1); aqua keeps it visible */
+#hero :focus-visible,#why :focus-visible,#closing :focus-visible,footer :focus-visible,.est-side :focus-visible,.concept-bar :focus-visible,header.top.dark :focus-visible{outline-color:var(--aqua)}
+#hero .demo-card :focus-visible{outline-color:var(--fresh)}
 .wrap{max-width:calc(var(--max) + var(--gut) + var(--gutr));margin:0 auto;padding-left:var(--gut);padding-right:var(--gutr)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:0;border-radius:999px;padding:14px 24px;min-height:48px;font-weight:600;font-size:16px;text-decoration:none;transition:transform .2s, background .2s, box-shadow .2s}
 .btn:active{transform:scale(.97)}
 .btn svg{transition:transform .25s}
-.btn:hover svg{transform:translateY(2px)}
+@media (hover:hover) and (pointer:fine){ .btn:hover svg{transform:translateY(2px)} }
 .btn-light{background:var(--aqua);color:#0b2f2e}
 .btn-light:hover{background:#d4f0ec}
 .btn-line{color:var(--on-dark);box-shadow:inset 0 0 0 1.5px rgba(248,243,234,.38)}
@@ -95,7 +97,7 @@ nav.links a:hover::after{transform:scaleX(1)}
   nav.links{display:none}
   .menu-btn{display:inline-flex}
   .menu-sheet{display:block;position:fixed;left:12px;right:12px;top:72px;z-index:59;background:#fff;color:var(--ink);border-radius:20px;padding:8px;box-shadow:0 24px 60px -20px rgba(0,0,0,.4);transform:translateY(-8px);opacity:0;visibility:hidden;transition:opacity .2s, transform .2s, visibility .2s}
-  .menu-sheet.open{opacity:1;transform:none;visibility:visible}
+  .menu-sheet.open{opacity:1;transform:none;visibility:visible;transition:opacity .2s, transform .2s, visibility 0s} /* visible at once, so focus can move in */
   .menu-sheet a{display:block;padding:14px 16px;border-radius:12px;text-decoration:none;font-weight:600;font-size:17px}
   .menu-sheet a:hover{background:var(--mint)}
 }
@@ -141,10 +143,6 @@ nav.links a:hover::after{transform:scaleX(1)}
 .d-total b{font-family:var(--serif);font-size:36px;color:var(--deep);line-height:1;font-variant-numeric:tabular-nums}
 .d-fine{display:block;font-size:13px;color:var(--muted);margin-top:4px;font-variant-numeric:tabular-nums}
 .d-foot{display:flex;justify-content:flex-end;padding-top:8px}
-.d-replay{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border:0;border-radius:999px;background:transparent;color:var(--deep);font-size:14.5px;font-weight:600}
-.d-replay:hover{background:var(--mint)}
-.d-replay[disabled]{opacity:.4;cursor:default;background:transparent}
-.d-replay svg{width:16px;height:16px}
 .demo .rv{transition:opacity .55s var(--out), transform .55s var(--out);transition-delay:calc(var(--i,0) * 110ms)}
 .demo.hide .rv{opacity:0;transform:translateY(10px);transition:none}
 .demo .d-book{transition:opacity .35s var(--out), transform .35s var(--out)}
@@ -191,23 +189,12 @@ ol.steps li:last-child{border-bottom:1px solid rgba(15,111,109,.16)}
 .step.on .t{color:var(--deep)}
 .step.on .step-art{background:var(--aqua)}
 .step.on .d{grid-template-rows:1fr}
-.j-stage{position:relative;height:min(76vh,700px);display:flex;justify-content:center;align-items:flex-end}
-.j-stage .pbox{position:absolute;bottom:18px;left:50%;height:calc(100% - 18px);aspect-ratio:534/1100;transform:translateX(-50%)}
-.j-stage img{position:absolute;inset:0;width:100%;height:100%;max-width:none;opacity:0;transition:opacity .45s ease;filter:drop-shadow(0 22px 22px rgba(15,60,58,.16))}
 .ring{position:absolute;border-radius:12px;box-shadow:0 0 16px 200vmax rgba(12,30,29,.46);pointer-events:none}
-.j-stage .spot{position:absolute;inset:0;clip-path:inset(1.4% 4.2% 1.6% 3.1% round 11cqw)}
-.j-stage .pbox{container-type:inline-size}
-.j-stage .hl{position:absolute;inset:0;opacity:0;transition:opacity .35s ease .15s;pointer-events:none;z-index:3}
-.j-stage .hl.on{opacity:1}
-.j-stage .hl b{position:absolute;left:0;top:var(--yc);transform:translate(calc(-100% - 26px),-50%);white-space:nowrap;background:var(--deep);color:#fff;font-size:13.5px;font-weight:600;padding:7px 12px;border-radius:999px;box-shadow:0 10px 20px -10px rgba(0,0,0,.45)}
-.j-stage .hl b::after{content:"";position:absolute;left:100%;top:50%;height:2px;width:calc(var(--x1) * 1cqw + 26px);background:var(--fresh)}
-.j-stage::after{z-index:0;content:"";position:absolute;bottom:4px;left:50%;width:min(260px,40%);height:26px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(15,60,58,.28),rgba(15,60,58,0))}
-.j-stage img.on{opacity:1}
 .j-cards,.j-nav{display:none}
 @media all{
   .j-wrap{grid-template-columns:minmax(0,1fr);gap:0;padding-bottom:var(--sec)}
   .j-left{min-width:0}
-  ol.steps,.j-stage{display:none}
+  ol.steps{display:none}
   .j-cards{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;margin:28px calc(-1*var(--gutr)) 0 calc(-1*var(--gut));padding:4px var(--gutr) 12px var(--gut);scroll-padding-left:var(--gut);scrollbar-width:none}
   .j-cards::-webkit-scrollbar{display:none}
   .j-card{flex:0 0 min(80vw,360px);scroll-snap-align:start;background:#fff;border-radius:24px;padding:22px 20px 0;box-shadow:0 0 0 1px rgba(15,111,109,.08);display:flex;flex-direction:column;overflow:hidden}
@@ -240,7 +227,6 @@ ol.steps li:last-child{border-bottom:1px solid rgba(15,111,109,.16)}
   .step-btn{padding:6px 0;min-height:46px}
   .step-btn .t{font-size:21px}
   .step .d p{font-size:15.5px;padding-bottom:10px}
-  .j-stage{height:min(80vh,620px)}
 }
 @media (min-width:1024px) and (max-height:799px){ .fcard{display:none} }
 main > section[id]:not(#hero):not(#journey){scroll-margin-top:24px}
@@ -250,11 +236,6 @@ main > section[id]:not(#hero):not(#journey){scroll-margin-top:24px}
 .help-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,5vw,72px);align-items:center}
 .help-copy h2{margin-top:0}
 .help-copy > p{color:var(--muted);margin-top:14px;max-width:500px}
-.can{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-width:520px}
-.can li{background:rgba(255,255,255,.7);border-radius:16px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start}
-.can li svg{width:22px;height:22px;flex:none;color:var(--deep);margin-top:2px}
-.can b{display:block;font-size:15.5px;color:var(--ink)}
-.can span{font-size:14px;color:var(--muted);line-height:1.45}
 .chat{background:#fff;border-radius:26px;padding:18px;box-shadow:0 30px 60px -36px rgba(15,111,109,.65);width:100%;max-width:580px;justify-self:end}
 .chat-head{display:flex;align-items:center;gap:12px;padding:2px 4px 14px;border-bottom:1px solid #eef0ee}
 .chat-head img{width:48px;height:48px;border-radius:50%;background:var(--mint);object-fit:cover;object-position:50% 10%}
@@ -271,13 +252,12 @@ main > section[id]:not(#hero):not(#journey){scroll-margin-top:24px}
 .typing i{width:7px;height:7px;border-radius:50%;background:var(--fresh);animation:dot 1s infinite}
 .typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
 @keyframes dot{0%,100%{opacity:.35}50%{opacity:1}}
-.chips{display:flex;flex-wrap:wrap;gap:8px;padding-top:14px;border-top:1px solid #eef0ee}
 .chip{border:0;background:#fff;color:var(--deep);border-radius:999px;padding:10px 15px;min-height:44px;font-size:15px;font-weight:500;box-shadow:inset 0 0 0 1px rgba(15,111,109,.28);transition:background .2s, transform .15s}
 .chip:hover{background:var(--mint)}
 .chip:active{transform:scale(.96)}
 .chip[disabled]{opacity:.45;cursor:default}
 @media (max-width:899px){ .help-grid{grid-template-columns:minmax(0,1fr)} .chat{justify-self:stretch;max-width:none} }
-@media (max-width:479px){ .can{grid-template-columns:1fr} }
+
 
 
 .thread{display:flex;align-items:center;gap:10px;margin-top:16px;font-size:15px;color:var(--muted);background:#fff;border-radius:999px;padding:6px 16px 6px 6px;width:max-content;max-width:100%;box-shadow:0 0 0 1px rgba(15,111,109,.1)}
@@ -314,7 +294,7 @@ main > section[id]:not(#hero):not(#journey){scroll-margin-top:24px}
 .pr-head p{color:var(--muted);margin-top:14px}
 .est{margin-top:36px;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);background:#fff;border-radius:28px;box-shadow:0 30px 60px -40px rgba(15,111,109,.55),0 0 0 1px rgba(15,111,109,.08)}
 .est-main{padding:clamp(20px,3vw,36px)}
-.tabs{display:grid;grid-template-columns:repeat(4,auto);width:100%;max-width:600px;background:var(--cream);border-radius:999px;padding:5px;gap:5px}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);width:100%;max-width:600px;background:var(--cream);border-radius:999px;padding:5px;gap:5px}
 .tabs button{border:0;background:#fff;border-radius:999px;padding:10px 12px;min-height:44px;font-weight:600;font-size:15px;color:var(--deep);white-space:nowrap;box-shadow:inset 0 0 0 1px rgba(15,111,109,.2);transition:background .2s,color .2s}
 .tabs button:hover{background:var(--mint)}
 .tabs button[aria-selected="true"]{background:var(--deep);color:#fff;box-shadow:none}
@@ -325,9 +305,9 @@ main > section[id]:not(#hero):not(#journey){scroll-margin-top:24px}
 .est-opts{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;margin-top:10px}
 .est-opts .est-note{margin-top:0}
 .first{display:inline-flex;align-items:center;gap:10px;min-height:44px;font-size:14.5px;font-weight:600;color:var(--deep);cursor:pointer;user-select:none}
-.first input{appearance:none;-webkit-appearance:none;margin:0;width:40px;height:24px;border-radius:999px;background:#cfd8d6;position:relative;cursor:pointer;transition:background .2s;flex:none}
-.first input::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .2s}
-.first input:checked{background:var(--deep)}
+.first input{appearance:none;-webkit-appearance:none;margin:0;width:40px;height:24px;border-radius:999px;background:#7d8f8d;position:relative;cursor:pointer;transition:background .2s;flex:none}
+.first input::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .2s var(--ease-out)}
+.first input:checked{background:var(--coral)} /* brand rule: coral marks offers */
 .first input:checked::after{transform:translateX(16px)}
 .first input:focus-visible{outline:3px solid var(--fresh);outline-offset:3px}
 .sample{display:inline-block;font-size:12.5px;font-weight:600;color:var(--deep);background:var(--mint);border-radius:999px;padding:3px 10px;white-space:nowrap;vertical-align:1px}
@@ -336,8 +316,8 @@ main > section[id]:not(#hero):not(#journey){scroll-margin-top:24px}
 .items li:first-child{border-top:0}
 .items .nm b{display:block;font-weight:600;font-size:16px}
 .items .nm span{font-size:14px;color:var(--muted)}
-.qty{display:flex;align-items:center;gap:6px}
-.qty button{width:40px;height:40px;border-radius:50%;border:0;display:flex;align-items:center;justify-content:center;font-size:20px;line-height:1;transition:transform .12s, background .2s}
+.qty{display:flex;align-items:center;gap:8px}
+.qty button{width:44px;height:44px;border-radius:50%;border:0;display:flex;align-items:center;justify-content:center;font-size:20px;line-height:1;transition:transform .12s, background .2s}
 .qty button:active{transform:scale(.9)}
 .qty .minus{background:#fff;color:var(--deep);box-shadow:inset 0 0 0 1.5px rgba(15,111,109,.35)}
 .qty .plus{background:var(--deep);color:#fff}
@@ -445,20 +425,11 @@ footer .row{display:flex;justify-content:space-between;gap:8px 24px;flex-wrap:wr
 /* journey: steps advance as you scroll, phone stays put; no pinning */
 @media (min-width:1024px) and (min-height:600px){
   .j-wrap{align-items:start}
-  .j-stage{position:sticky;top:calc((100vh - min(76vh,700px)) / 2)}
   ol.steps{margin-top:8px}
   ol.steps li{min-height:52vh;display:flex;flex-direction:column;justify-content:center;border-top:0}
   ol.steps li:last-child{border-bottom:0;min-height:62vh}
   .step .d{grid-template-rows:1fr}
 }
-
-/* Bubbles: four jobs */
-.jobs{list-style:none;margin:28px 0 0;padding:0;max-width:520px}
-.jobs li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;padding:12px 0;border-top:1px solid rgba(15,111,109,.16)}
-.jobs li:last-child{border-bottom:1px solid rgba(15,111,109,.16)}
-.jobs svg{width:22px;height:22px;color:var(--deep);margin-top:3px}
-.jobs b{display:block;font-size:16px}
-.jobs span{font-size:15px;color:var(--muted);line-height:1.45}
 .help-copy > p.wont{margin-top:20px;max-width:520px;font-size:15.5px;color:var(--ink)}
 .asks button:last-child{grid-column:1/-1;background:#fff;box-shadow:inset 0 0 0 1px rgba(15,111,109,.22)}
 
@@ -478,6 +449,9 @@ footer .row{display:flex;justify-content:space-between;gap:8px 24px;flex-wrap:wr
 .pill span:hover{background:var(--mint)}
 .pill input:checked + span{background:var(--deep);color:#fff;box-shadow:none}
 .pill input:focus-visible + span{outline:3px solid var(--fresh);outline-offset:2px}
+.est-side .book{margin-top:20px;align-self:stretch}
+.est-side .book:disabled{opacity:.5;cursor:not-allowed}
+@media (max-width:899px){ .est-side .book{margin:0 0 0 auto;align-self:center;flex:none;min-height:44px;padding:0 16px;font-size:15px} }
 .est-side .slot-line{margin:16px 0 0;padding-top:14px;border-top:1px solid rgba(255,255,255,.12);font-size:15px;color:var(--on-dark)}
 @media (max-width:899px){ .est-side .slot-line{display:none} }
 
@@ -545,7 +519,6 @@ footer .row a{color:var(--on-dark);text-underline-offset:3px}
 .d-ask button:active{transform:scale(.94)}
 .d-ask button[disabled]{opacity:.45;cursor:default}
 .d-ask button svg{width:20px;height:20px}
-.d-hint{font-size:13px;color:var(--muted);margin:8px 4px 0}
 .demo.noitems .d-book dl,.demo.noitems .d-book > .rv:last-child{display:none}
 
 /* proof: right after the hero */
@@ -584,7 +557,7 @@ footer .row a{color:var(--on-dark);text-underline-offset:3px}
 /* shorter service tags on phones */
 @media (max-width:599px){
   .tags{row-gap:14px} .tag{padding-top:16px} .tag::before{height:18px}
-  .label{padding:24px 16px 14px} .label .good{display:none}
+  .label{padding:24px 16px 14px}
   .label .rate{margin-top:8px;padding-top:10px} .label .est-link{margin-top:10px} .rail{margin-top:28px}
 }
 
@@ -595,14 +568,6 @@ footer .row a{color:var(--on-dark);text-underline-offset:3px}
 #why .track-wrap{margin-top:0;align-items:center}
 #why .tracker-intro h2{font-size:var(--h2);color:#fff;max-width:440px}
 #why .tracker-intro p{max-width:420px}
-@media (min-width:1280px){
-  .j-cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;overflow:visible;margin:40px 0 0;padding:0}
-  .j-card{padding:18px 16px 0}
-  .j-card h3{font-size:20px}
-  .j-card p{font-size:15px}
-  .j-card .shot{width:100%;margin:16px 0 18px}
-  .j-nav{display:none}
-}
 @media (max-width:599px){
   .tags{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin:0 calc(-1*var(--gutr)) 0 calc(-1*var(--gut));padding:4px var(--gutr) 14px var(--gut);scroll-padding-left:var(--gut);scrollbar-width:none}
   .tags::-webkit-scrollbar{display:none}
@@ -629,7 +594,7 @@ header.top:not(.solid) ~ .menu-sheet{top:108px}
 .demo.nohello .d-hello{opacity:0;transform:translateY(8px);transition:none}
 .demo.nome .d-me{display:none}
 .d-book dl div{padding:5px 0}
-.d-try{display:flex;flex-wrap:nowrap;align-items:center;gap:6px;margin:10px -18px 0;padding:0 18px 2px;overflow-x:auto;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent)}
+.d-try{display:flex;flex-wrap:nowrap;align-items:center;gap:6px;margin:6px -18px 0;padding:4px 18px 6px;overflow-x:auto;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent)}
 .d-try::-webkit-scrollbar{display:none}
 .d-try button{flex:none;white-space:nowrap}
 .d-try span{font-size:13.5px;color:var(--muted);margin-right:2px}
@@ -687,6 +652,82 @@ header.top:not(.solid) ~ .menu-sheet{top:108px}
   .close-cta .btn-line{flex:1 1 0;padding:12px 10px;font-size:14.5px}
 }
 
+/* ============ polish ============ */
+h2,h3{text-wrap:balance}
+p,li,dd{text-wrap:pretty} /* no single word stranded on the last line */
+input{caret-color:var(--deep)}
+
+/* ============ micro-interactions ============ */
+:root{--ease-out:cubic-bezier(0.23,1,0.32,1)}
+/* hero promises: each icon draws in once, then makes one move that says what it means */
+/* drawn state is the default; the hidden start only exists inside the animation, so icons never stay blank */
+.trust.draw svg *{stroke-dasharray:1;animation:draw .7s var(--ease-out) backwards;animation-delay:calc(var(--i)*90ms + 250ms)}
+@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes tag-swing{35%{transform:rotate(-14deg)}70%{transform:rotate(6deg)}}
+/* demo send: nudge on hover, fly out and back on send (WAAPI in script) */
+.d-ask button svg{transition:transform .2s var(--ease-out)}
+@media (hover:hover) and (pointer:fine){ .d-ask button:hover svg{transform:translateX(2px)} }
+/* phone menu: three lines fold into a close mark */
+.menu-btn path{transform-box:fill-box;transform-origin:center;transition:transform .22s var(--ease-out),opacity .15s ease}
+.menu-btn[aria-expanded="true"] .l1{transform:translateY(5px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] .l2{opacity:0}
+.menu-btn[aria-expanded="true"] .l3{transform:translateY(-5px) rotate(-45deg)}
+/* estimator: rows of a newly picked service arrive in order instead of jumping */
+#items li{animation:row-in .26s var(--ease-out) both;animation-delay:calc(var(--k,0)*45ms)}
+@keyframes row-in{from{opacity:0;transform:translateY(6px)}}
+/* how it works: the icon of the card you swipe to pops in */
+.j-card.on .step-art > *{animation:icon-in .32s var(--ease-out)}
+@keyframes icon-in{from{opacity:.4;transform:scale(.86)}}
+/* tracker: the current stage sends one ping when it becomes current */
+.stages .dot{position:relative}
+.stages li.now .dot::before{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:0 0 0 2px var(--coral);opacity:0;animation:ping .9s var(--ease-out)}
+@keyframes ping{from{opacity:.7;transform:scale(1)}to{opacity:0;transform:scale(2.2)}}
+:root{--ease-in-out:cubic-bezier(0.77,0,0.175,1)}
+/* soap bubbles made by script: cursor trail in the hero, celebration on a booking */
+.cb{position:absolute;border-radius:50%;pointer-events:none;background:radial-gradient(circle at 32% 30%,rgba(255,255,255,.55) 0 10%,rgba(191,231,227,.06) 14% 62%,rgba(191,231,227,.22) 100%);box-shadow:inset 0 0 0 1.5px rgba(191,231,227,.4)}
+.hero-bubbles i.cb{bottom:auto;animation:none}
+.cb.on-light{z-index:3;background:radial-gradient(circle at 32% 30%,rgba(255,255,255,.95) 0 12%,rgba(31,156,143,.08) 16% 62%,rgba(31,156,143,.3) 100%);box-shadow:inset 0 0 0 1.5px rgba(31,156,143,.5)}
+/* Ask Bubbles buttons: each icon acts out its meaning on hover */
+@media (hover:hover) and (pointer:fine){
+  .asks button:hover svg{animation:.5s var(--ease-out)}
+  .asks [data-q="0"]:hover svg{animation-name:drive}
+  .asks [data-q="1"]:hover svg{animation-name:tag-swing;transform-origin:30% 30%}
+  .asks [data-q="2"]:hover svg{animation-name:hop}
+  .asks [data-q="3"]:hover svg{animation-name:drip;transform-origin:50% 100%}
+  .asks [data-q="4"]:hover svg{animation-name:tilt}
+}
+@keyframes drive{30%{transform:translateX(3px)}55%{transform:translateX(-1px)}}
+@keyframes hop{35%{transform:translateY(-3px)}65%{transform:scaleY(.94)}}
+@keyframes drip{35%{transform:scale(1.08,.9)}70%{transform:scale(.96,1.05)}}
+@keyframes tilt{30%{transform:rotate(-12deg)}65%{transform:rotate(8deg)}}
+/* estimator tabs: an "active" copy of the tab row is clipped to the chosen tab, so the highlight slides */
+.tabs{position:relative}
+.tabs-on{position:absolute;inset:0;background:transparent;pointer-events:none;transition:clip-path .25s var(--ease-in-out)}
+.tabs-on button{background:var(--deep);color:#fff;box-shadow:none}
+.tabs.has-pill button[aria-selected="true"]{background:#fff;color:var(--deep);box-shadow:inset 0 0 0 1px rgba(15,111,109,.2)}
+/* step screens: soft spotlight at rest; it deepens and lands on the card you point at (or swipe to on phones) */
+.j-card .scr .ring{opacity:.35;transform:scale(1.06);transition:opacity .25s var(--ease-out),transform .25s var(--ease-out)}
+@media (hover:hover) and (pointer:fine){ .j-card:hover .scr .ring{opacity:1;transform:none} }
+@media (hover:none){ .j-card.on .scr .ring{opacity:1;transform:none} }
+/* FAQ answers glide open (browsers without ::details-content just snap, as before) */
+.qa details{interpolate-size:allow-keywords}
+.qa details::details-content{block-size:0;overflow:hidden;transition:block-size .25s var(--ease-out),content-visibility .25s allow-discrete}
+.qa details[open]::details-content{block-size:auto}
+.d-retry{margin-top:10px}
+/* Bubbles' reply to "Book this": in the teal side panel on wide screens, under the pickup slot on phones */
+.est-reply{position:relative;margin-top:16px;padding:14px 16px;border-radius:16px;background:rgba(255,255,255,.08);font-size:15px;line-height:1.5;animation:row-in .26s var(--ease-out)}
+.est-reply p{margin:0}
+.est-reply .r-heard{color:var(--on-dark-2);font-style:italic;margin-bottom:6px}
+.est-reply .r-note{margin-top:10px;font-size:14px;color:var(--on-dark-2)}
+.est-reply a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+.est-main .est-reply{background:var(--mint);color:var(--ink)}
+.est-main .est-reply .r-heard,.est-main .est-reply .r-note{color:var(--muted)}
+/* phones: price bar sits at the bottom, in thumb reach; the first chat message shows on first load */
+@media (max-width:899px){ .est-side{order:1;top:auto;bottom:max(10px,env(safe-area-inset-bottom))} #estReply{scroll-margin-bottom:130px} }
+@media (max-width:599px){ .hero-grid{gap:88px} .demo-bub{top:-84px;height:96px} }
+/* wide screens: four step cards in view, so only step 5 needs the arrow */
+@media (min-width:1400px){ .j-card{flex-basis:calc((100% - 48px)/4)} }
+
 @media (prefers-reduced-motion: reduce){
   .hero-bubbles{display:none}
 }
@@ -740,7 +781,7 @@ header.top:not(.solid) ~ .menu-sheet{top:108px}
     </nav>
     <a class="app-btn" href="#prices">Get a price</a>
     <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menuSheet" aria-label="Open menu">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path class="l1" d="M4 7h16"/><path class="l2" d="M4 12h16"/><path class="l3" d="M4 17h16"/></svg>
     </button>
     </div>
   </div>
@@ -927,12 +968,18 @@ header.top:not(.solid) ~ .menu-sheet{top:108px}
           <div class="slot-row"><label class="pill"><input type="radio" name="pwin" value="9 to 11 AM" checked><span>9–11 AM</span></label><label class="pill"><input type="radio" name="pwin" value="1 to 3 PM"><span>1–3 PM</span></label><label class="pill"><input type="radio" name="pwin" value="5 to 7 PM"><span>5–7 PM</span></label></div>
         </fieldset>
       </div>
-      <div class="est-side" aria-live="polite">
+      <div class="est-side">
         <span class="lbl">Estimated total</span>
-        <div class="total" id="estTotal">₹114</div>
+        <div class="total" id="estTotal" aria-live="polite">₹98</div>
         <div class="count"><span id="estCount">5 items · Steam Press</span><span class="fine" id="estFine">Incl. ₹10 pickup and delivery, 20% off items</span></div>
         <dl class="bill" id="bill"></dl>
         <p class="slot-line" id="slotLine">Pickup tomorrow, 9 to 11 AM</p>
+        <button class="btn btn-light book" type="button" id="estBook"><span class="cb-long">Book this with Bubbles</span><span class="cb-short">Book</span></button>
+        <div class="est-reply" id="estReply" role="status" hidden>
+          <p class="r-heard">“<span id="rHeard"></span>”</p>
+          <p class="r-say"><b>Bubbles:</b> <span id="rSay"></span></p>
+          <p class="r-note">This is a concept, so nothing is booked for real. <a data-link="prototype" hidden>Try the full flow in the prototype</a></p>
+        </div>
         <a class="next" href="#journey" id="estNext">See how booking works <span aria-hidden="true">→</span></a>
       </div>
     </div>
@@ -993,6 +1040,22 @@ header.top:not(.solid) ~ .menu-sheet{top:108px}
 <script>
 (function(){
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const EASE_OUT='cubic-bezier(0.23,1,0.32,1)';
+/* one soap bubble: rises, drifts, then pops (grows a little and fades); removes itself */
+function bubble(layer,x,y,s,dx,up,dur,delay,cls){ const b=document.createElement('i'); b.className='cb'+(cls?' '+cls:'');
+  b.style.cssText='width:'+s+'px;height:'+s+'px;left:'+(x-s/2)+'px;top:'+(y-s/2)+'px'; layer.appendChild(b);
+  return b.animate([{transform:'scale(.6)',opacity:0},{transform:'translate('+dx*.3+'px,'+(-up*.25)+'px)',opacity:1,offset:.2},{transform:'translate('+dx+'px,'+(-up)+'px)',opacity:.85,offset:.85},{transform:'translate('+dx+'px,'+(-up-6)+'px) scale(1.3)',opacity:0}],{duration:dur,delay:delay||0,easing:EASE_OUT,fill:'backwards'}).finished.then(()=>b.remove()); }
+/* ---------- micro: soap bubbles follow the cursor in the hero (mouse only, behind the content) ---------- */
+if(!reduce && matchMedia('(hover:hover) and (pointer:fine)').matches){
+  // kept calm: sparse and small, and silent over the chat card or while Bubbles is replying, so it never competes with the demo
+  const hero=document.getElementById('hero'), layer=hero.querySelector('.hero-bubbles'), demoEl=document.getElementById('demo'); let lx=-99,ly=-99,live=0;
+  hero.addEventListener('pointermove',e=>{ if(live>=7 || e.target.closest('.demo-card') || demoEl.classList.contains('busy')) return;
+    const r=hero.getBoundingClientRect(), x=e.clientX-r.left, y=e.clientY-r.top;
+    if(Math.hypot(x-lx,y-ly)<60) return; lx=x; ly=y; live++;
+    bubble(layer,x,y,6+Math.random()*10,(Math.random()-.5)*24,36+Math.random()*40,1000+Math.random()*300).then(()=>live--); });
+}
+/* ---------- micro: hero promise icons draw in (skipped for reduced motion, so they stay static) ---------- */
+if(!reduce){ const tr=document.querySelector('.trust'); tr.querySelectorAll('li').forEach((li,i)=>li.style.setProperty('--i',i)); tr.querySelectorAll('svg *').forEach(s=>s.setAttribute('pathLength',1)); tr.classList.add('draw'); }
 /* ---------- header + menu ---------- */
 const header=document.getElementById('top'), brandUse=document.getElementById('brandUse');
 function onHeader(){
@@ -1009,103 +1072,136 @@ addEventListener('scroll',qHeader,{passive:true}); addEventListener('resize',qHe
 const LINKS={ prototype:'https://www.figma.com/proto/BiZ3TffBXTSHCCWhZDNHqG/td?node-id=325-7701&scaling=scale-down&content-scaling=fixed&starting-point-node-id=325%3A7701&show-proto-sidebar=1&page-id=188%3A4236', caseStudy:'https://www.behance.net/gallery/257452749/Easy-Laundry-iOS-App-Website-UXUI-Case-Study' };
 document.querySelectorAll('[data-link]').forEach(a=>{ const u=LINKS[a.dataset.link]; if(u){ a.href=u; a.target='_blank'; a.rel='noopener'; a.hidden=false; } });
 const menuBtn=document.getElementById('menuBtn'), sheet=document.getElementById('menuSheet');
-function setMenu(open){ sheet.classList.toggle('open',open); menuBtn.setAttribute('aria-expanded',open); menuBtn.setAttribute('aria-label',open?'Close menu':'Open menu'); }
+function setMenu(open){ sheet.classList.toggle('open',open); menuBtn.setAttribute('aria-expanded',open); menuBtn.setAttribute('aria-label',open?'Close menu':'Open menu');
+  if(open){ const first=sheet.querySelector('a:not([hidden])'); if(first) first.focus({preventScroll:true}); } }
 menuBtn.addEventListener('click',()=>setMenu(!sheet.classList.contains('open')));
+// a tap anywhere outside the open menu closes it
+document.addEventListener('pointerdown',e=>{ if(sheet.classList.contains('open') && !sheet.contains(e.target) && !menuBtn.contains(e.target)) setMenu(false); });
 sheet.addEventListener('click',e=>{ if(e.target.closest('a')) setMenu(false); });
-addEventListener('keydown',e=>{ if(e.key==='Escape') setMenu(false); });
+addEventListener('keydown',e=>{ if(e.key==='Escape' && sheet.classList.contains('open')){ const inside=sheet.contains(document.activeElement); setMenu(false); if(inside) menuBtn.focus(); } });
 
 /* ================= HERO: a sentence becomes a booking ================= */
 const demo=document.getElementById('demo');
 if (demo){
   const $=id=>document.getElementById(id);
-  const typed=$('dType'), body=demo.querySelector('.dc-body'), form=$('dAsk'), field=$('dAskInput'), send=form.querySelector('button');
+  const typed=$('dType'), body=demo.querySelector('.dc-body'), form=$('dAsk'), field=$('dAskInput'), send=form.querySelector('button'), bookEl=demo.querySelector('.d-book');
+  // a focused "Try" chip is scrolled clear of the fade at the row's edge
+  demo.querySelectorAll('.d-try button').forEach(b=>b.addEventListener('focus',()=>{ const p=b.parentElement, pr=p.getBoundingClientRect(), br=b.getBoundingClientRect();
+    if(br.right>pr.right-28) p.scrollLeft+=br.right-pr.right+28; else if(br.left<pr.left) p.scrollLeft-=pr.left-br.left; }));
   let timers=[]; const later=(fn,ms)=>timers.push(setTimeout(fn,ms));
+  // first booking a visitor makes: a few soap bubbles rise from the price (once per visit)
+  let cheer=0;
+  function celebrate(){ const d=demo.getBoundingClientRect(), t=$('dTotal').getBoundingClientRect(), x=t.left-d.left+t.width/2, y=t.top-d.top;
+    for(let k=0;k<6;k++) bubble(demo,x+(Math.random()-.5)*80,y,10+Math.random()*12,(Math.random()-.5)*36,70+Math.random()*60,1100+Math.random()*300,k*60,'on-light'); }
   function play(text,greet){
     timers.forEach(clearTimeout); timers=[];
     $('dTypeSr').textContent='You: '+text;
     if (reduce){ typed.textContent=text; demo.classList.remove('hide','think','typing-now','nohello','nome','busy'); return; }
     body.style.minHeight=''; body.style.minHeight=body.offsetHeight+'px';
-    send.disabled=true; demo.classList.add('busy','hide'); demo.classList.remove('think','typing-now'); typed.textContent='';
+    send.disabled=true; demo.classList.add('busy','hide'); bookEl.setAttribute('aria-busy','true'); /* screen readers wait until it's shown */ demo.classList.remove('think','typing-now'); typed.textContent='';
     if (greet){ demo.classList.add('nohello','nome'); later(()=>demo.classList.remove('nohello'),250); }
     let i=0;
     const type=()=>{ typed.textContent=text.slice(0,++i);
       if (i<text.length) return later(type, 22+Math.random()*30);
       later(()=>{ demo.classList.remove('typing-now'); demo.classList.add('think'); },300);
-      later(()=>{ demo.classList.remove('think'); void demo.offsetWidth; demo.classList.remove('hide'); later(()=>{ send.disabled=false; demo.classList.remove('busy'); },900); },1300);
+      later(()=>{ demo.classList.remove('think'); void demo.offsetWidth; demo.classList.remove('hide'); later(()=>{ send.disabled=false; demo.classList.remove('busy'); bookEl.removeAttribute('aria-busy'); if(cheer===1){ cheer=2; celebrate(); } },900); },1300);
     };
     later(()=>{ demo.classList.remove('nome'); demo.classList.add('typing-now'); type(); }, greet?1300:350);
   }
   const NUM={a:1,an:1,one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10};
-  const ITEM=[['T-shirt','t-?shirts?|tees?'],['Shirt','shirts?'],['Jeans','jeans'],['Trousers','trousers|pants'],['Saree','sarees?|saris?'],['Bedsheet','bed ?sheets?|sheets?'],['Blazer','blazers?|jackets?'],['Suit, 2 piece','suits?'],['Sneakers','sneakers?|shoes?'],['Curtain panel','curtains?|drapes?']];
+  const ITEM=[['T-shirt','t-?shirts?|tees?'],['Shirt','shirts?'],['Kurta','kurtas?|kurtis?'],['Jeans','jeans'],['Trousers','trousers|pants'],['Salwar','salwars?|leggings?'],['Saree','sarees?|saris?'],['Bedsheet','bed ?sheets?|sheets?'],['Blazer','blazers?|jackets?'],['Suit, 2 piece','suits?'],['Sneakers','sneakers?|shoes?'],['Curtain panel','curtains?|drapes?'],['Towel','towels?'],['Dupatta','dupattas?']];
+  // priced like the item they resemble; towels and dupattas have no per-piece price, so they're reported as left out
+  const ALIAS={Kurta:'Shirt',Salwar:'Trousers'}, priced=(s,name)=>SVC[s].items.find(x=>x[0]===(ALIAS[name]||name));
+  const BULKY={carpet:'carpets',rug:'rugs',sofa:'sofas',mattress:'mattresses'};
   const ONE={'Jeans':'pair of jeans','Trousers':'pair of trousers','Suit, 2 piece':'2-piece suit'}, MANY={'Jeans':'jeans','Trousers':'trousers','Suit, 2 piece':'2-piece suits','Sneakers':'pairs of shoes','Curtain panel':'curtain panels'};
   ONE['Sneakers']='pair of shoes'; ONE['Curtain panel']='curtain panel';
   const SVC_NAME={press:'Steam Press',fold:'Wash & Fold',dry:'Dry Clean',iron:'Ironing',shoe:'Shoe Laundry',curtain:'Curtain Cleaning'};
   /* forgive small typos: "shrits" -> "shirts", "jeens" -> "jeans", "tommorow" -> "tomorrow" */
-  const WORDS=['shirt','shirts','tshirt','tshirts','t-shirt','t-shirts','tees','jeans','trousers','pants','saree','sarees','sari','saris','bedsheet','bedsheets','sheets','blazer','blazers','jacket','jackets','suit','suits','pair','pairs','dry','clean','cleaning','iron','ironing','wash','fold','steam','pressed','press','today','tomorrow','monday','tuesday','wednesday','thursday','friday','saturday','sunday','morning','afternoon','evening','night'];
+  const WORDS=['shirt','shirts','tshirt','tshirts','t-shirt','t-shirts','tees','jeans','trousers','pants','saree','sarees','sari','saris','bedsheet','bedsheets','sheets','blazer','blazers','jacket','jackets','suit','suits','pair','pairs','dry','clean','cleaning','iron','ironing','wash','fold','steam','pressed','press','kurta','kurtas','kurti','kurtis','salwar','leggings','towel','towels','dupatta','dupattas','tonight','today','tomorrow','monday','tuesday','wednesday','thursday','friday','saturday','sunday','morning','afternoon','evening','night'];
   function lev(a,b){ const m=a.length,n=b.length; if(Math.abs(m-n)>2) return 9; let pp=null, prev=[...Array(n+1).keys()];
     for(let i=1;i<=m;i++){ const cur=[i]; for(let j=1;j<=n;j++){ cur[j]=Math.min(prev[j]+1,cur[j-1]+1,prev[j-1]+(a[i-1]===b[j-1]?0:1));
       if(pp&&j>1&&a[i-1]===b[j-2]&&a[i-2]===b[j-1]) cur[j]=Math.min(cur[j],pp[j-2]+1); } pp=prev; prev=cur; } return prev[n]; }
   function fix(text){ return text.replace(/[a-z-]{4,}/g,w=>{ if(WORDS.includes(w)) return w; let best=w,bd=w.length>=7?2:1;
     for(const c of WORDS){ const d=lev(w,c); if(d<=bd){ bd=d; best=c; if(d===1&&w.length<7) break; } } return best; }); }
   function read(text){
-    const t=' '+fix(text.toLowerCase())+' ';
+    let t=' '+fix(text.toLowerCase())+' ';
+    // "shirts 2" -> "2 shirts", unless a number already leads the item or the number belongs to the next item
+    const ALLN=ITEM.map(x=>x[1]).join('|'), LEAD=new RegExp('(?:\\d|\\b(?:'+Object.keys(NUM).join('|')+'))\\s+$');
+    t=t.replace(new RegExp('\\b('+ALLN+')\\s+(\\d+)\\b(?!\\s*(?:kg|kilo|am|pm)\\b)(?!\\s+(?:'+ALLN+')\\b)','g'),(all,noun,num,off,str)=>LEAD.test(str.slice(0,off))?all:num+' '+noun);
     const svc=/shoe|sneaker/.test(t)?'shoe':/curtain|drape/.test(t)?'curtain':/dry[ -]?clean/.test(t)?'dry':/\biron/.test(t)?'iron':/wash|fold|\bkg\b|kilo/.test(t)?'fold':'press';
-    const day=(t.match(/\b(today|tomorrow|monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b/)||[0,'tomorrow'])[1];
-    const win=/evening|night/.test(t)?'5 to 7 PM':/afternoon/.test(t)?'1 to 3 PM':'9 to 11 AM';
-    const got=[], missing=[];
-    if (svc==='fold'){ const m=t.match(/(\d+(?:\.\d+)?)\s*(?:kg|kilo)/); const kg=m?Math.max(1,Math.min(20,Math.round(+m[1]))):3; got.push([kg+' kg of everyday clothes', kg*40]); }
+    const day=/\btonight\b/.test(t)?'today':(t.match(/\b(today|tomorrow|monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b/)||[0,'tomorrow'])[1];
+    // a clock time picks the nearest two-hour window, and says so when it had to move it
+    const hm=t.match(/\b(\d{1,2})(?::\d{2})?\s*(am|pm)\b/); let win, timeNote='';
+    if (hm){ const h=(+hm[1])%12+(hm[2]==='pm'?12:0), W=[[9,11,'9 to 11 AM'],[13,15,'1 to 3 PM'],[17,19,'5 to 7 PM']];
+      const best=W.reduce((b,w)=>{ const d=h<w[0]?w[0]-h:h>=w[1]?h-w[1]+1:0; return d<b[0]?[d,w]:b; },[99,null])[1];
+      win=best[2]; if(h<best[0]||h>=best[1]) timeNote=hm[1]+' '+hm[2].toUpperCase()+" isn't a pickup window, so I picked the nearest, "+win; }
+    else win=/evening|night/.test(t)?'5 to 7 PM':/afternoon/.test(t)?'1 to 3 PM':'9 to 11 AM';
+    const got=[], missing=[], miss=[], bulky=BULKY[(t.match(/\b(carpet|rug|sofa|mattress)/)||[])[1]];
+    let adjusted=false, zero=false, guess=false;
+    if (svc==='fold'){ const m=t.match(/(\d+(?:\.\d+)?)\s*(?:kg|kilo)/); const kg=m?Math.max(1,Math.min(20,Math.round(+m[1]))):3; if(m&&kg!==+m[1]) adjusted=true; if(!m && new RegExp('\\b(?:'+ALLN+')\\b').test(t)) guess=true; got.push([kg+' kg of everyday clothes', kg*40]); }
     else {
       let rest=t;
       for (const [name,src] of ITEM){
-        const re=new RegExp('(?:\\b(\\d+|'+Object.keys(NUM).join('|')+')\\s+)?(?:pairs? of\\s+)?\\b(?:'+src+')\\b','g');
+        const re=new RegExp('(?:\\b(\\d+(?:\\.\\d+)?|'+Object.keys(NUM).join('|')+')\\s+)?(?:pairs? of\\s+)?\\b(?:'+src+')\\b','g');
         let m; while((m=re.exec(rest))){
-          const n=Math.min(20, m[1]?(/\d/.test(m[1])?+m[1]:NUM[m[1]]):1), it=SVC[svc].items.find(x=>x[0]===name); if(!n) continue;
+          const raw=m[1]?(/\d/.test(m[1])?+m[1]:NUM[m[1]]):1, n=Math.min(20,Math.round(raw)), it=priced(svc,name); if(!n){ zero=true; continue; } if(n!==raw) adjusted=true;
           if (it){ const k=got.findIndex(g=>g[2]===name); const tot=(k>-1?got[k][3]:0)+n, lab=tot+' '+(tot===1?(ONE[name]||name.toLowerCase()):(MANY[name]||name.toLowerCase()+'s')); if(k>-1) got[k]=[lab,it[1]*tot,name,tot]; else got.push([lab,it[1]*tot,name,tot]); }
-          else if (!missing.includes(name.toLowerCase())) missing.push(name.toLowerCase());
+          else { const pn=MANY[name]||(/s$/.test(name)?name:name+'s').toLowerCase(); if(!missing.includes(pn)){ missing.push(pn); miss.push(name); } }
         }
         rest=rest.replace(re,' ');
       }
     }
-    return {svc,day,win,got,missing};
+    // suggest a service that actually lists the first left-out item; anything without a per-piece price goes by weight
+    const alt=miss.length ? (Object.keys(SVC).find(k=>k!==svc && priced(k,miss[0])) || 'fold') : null;
+    return {svc,day,win,got,missing,alt,bulky,adjusted,zero,guess,timeNote};
   }
+  // capture phase: runs before the handler below reads and clears the field
+  form.addEventListener('submit',()=>{ if(reduce||!field.value.trim()) return;
+    form.querySelector('button svg').animate([{transform:'none',opacity:1},{transform:'translateX(14px)',opacity:0,offset:.4},{transform:'translateX(-14px)',opacity:0,offset:.41},{transform:'none',opacity:1}],{duration:420,easing:EASE_OUT}); },true);
   form.addEventListener('submit',e=>{ e.preventDefault();
     const text=field.value.trim(); if(!text){ field.focus(); return; }
     const r=read(text), say=$('dSay');
     if (!r.got.length){
       demo.classList.add('noitems');
-      say.textContent = /carpet|rug|sofa|mattress/i.test(text) ? "We don’t clean carpets yet, sorry. Try shirts, jeans, sarees or bedsheets." : r.missing.length ? "CleanCare Laundry doesn't list "+r.missing.join(' or ')+" for "+SVC_NAME[r.svc]+". Try another service, like dry clean." : "I couldn't find any clothes in that. Try something like: 2 shirts and a saree, steam pressed, Saturday evening.";
+      say.textContent = r.bulky ? "We don’t clean "+r.bulky+" yet, sorry. Try shirts, jeans, sarees or bedsheets." : r.missing.length ? "CleanCare Laundry doesn't list "+r.missing.join(' or ')+" for "+SVC_NAME[r.svc]+"." : r.zero ? "That's zero items, so there's nothing to pick up. Tell me how many, like 3 shirts." : "I couldn't find any clothes in that. Try something like: 2 shirts and a saree, steam pressed, Saturday evening.";
+      // one tap retries the same sentence with the service that does list the item
+      if (!r.bulky && r.missing.length){ const b=document.createElement('button'); b.type='button'; b.className='chip d-retry'; b.textContent='Try '+SVC_NAME[r.alt];
+        const word={press:'steam press',fold:'wash & fold',dry:'dry clean',iron:'ironing'}[r.alt]||'';
+        b.addEventListener('click',e=>{ field.value=text.replace(/\b(dry[ -]?clean(ed|ing)?|iron(ed|ing)?|wash(ed)?|fold(ed)?|steam(ed)?|press(ed)?)\b/gi,'').replace(/\s{2,}/g,' ').trim()+(word?', '+word:''); form.requestSubmit(); if(e.detail===0) field.focus(); });
+        say.append(' ',b); }
     } else {
       demo.classList.remove('noitems');
       const items=r.got.reduce((a,g)=>a+g[1],0), off=Math.round(items*.2);
-      say.textContent = r.missing.length ? "Done. I left out "+r.missing.join(' and ')+" (not offered for "+SVC_NAME[r.svc]+"). Here's your booking to check:" : "Done. Here's your booking to check:";
+      const notes=[];
+      if (r.missing.length) notes.push("I left out "+r.missing.join(' and ')+" (not offered for "+SVC_NAME[r.svc]+")");
+      if (r.bulky) notes.push("we don’t clean "+r.bulky+" yet");
+      if (r.adjusted) notes.push("I rounded quantities to whole pieces, up to 20 each");
+      if (r.guess) notes.push("Wash & Fold is priced by weight, so I guessed 3 kg");
+      if (r.timeNote) notes.push(r.timeNote);
+      say.textContent = "Done. "+(notes.length ? notes.join('; ').replace(/^./,c=>c.toUpperCase())+". " : "")+"Here's your booking to check:";
       $('dSvc').textContent=SVC_NAME[r.svc]; $('dItems').textContent=r.got.map(g=>g[0]).join(', ');
       $('dWhen').textContent=r.day.charAt(0).toUpperCase()+r.day.slice(1)+', '+r.win;
       $('dTotal').textContent='₹'+(items-off+10); $('dFine').textContent='₹'+items+' items − ₹'+off+' first-order discount + ₹10 pickup';
+      if(!cheer) cheer=1;
     }
     play(text); field.value='';
   });
-  demo.querySelectorAll('[data-try]').forEach(b=>b.addEventListener('click',()=>{ field.value=b.dataset.try; form.requestSubmit(); }));
-  play(typed.textContent,true);
+  // while a reply is playing, ignore chips (pointer-events only blocked mouse; keyboard could restart it mid-way)
+  demo.querySelectorAll('[data-try]').forEach(b=>b.addEventListener('click',()=>{ if(demo.classList.contains('busy')) return; field.value=b.dataset.try; form.requestSubmit(); }));
+  // start typing when the card is on screen (on phones it begins below the first screen); the greeting stays visible
+  if (reduce || !('IntersectionObserver' in window)) play(typed.textContent,true);
+  else { const msg=typed.textContent; demo.classList.add('hide','nome'); typed.textContent='';
+    const io=new IntersectionObserver(es=>{ if(es.some(e=>e.isIntersecting)){ io.disconnect(); play(msg); } },{threshold:.4}); io.observe(demo.querySelector('.demo-card')); }
 }
 
 /* ================= JOURNEY ================= */
-const steps=[...document.querySelectorAll('.step')], stageImgs=[...document.querySelectorAll('#jStage img')];
-let active=0;
-const stageCos=[...document.querySelectorAll('#jStage .hl')];
-function setStep(i){ if(i===active) return; active=i; steps.forEach((s,k)=>s.classList.toggle('on',k===i)); stageImgs.forEach((im,k)=>im.classList.toggle('on',k===i)); stageCos.forEach((c,k)=>c.classList.toggle('on',k===i)); }
-const deskJ=matchMedia('(min-width:1024px) and (min-height:600px)');
-steps.forEach((s,i)=>s.querySelector('.step-btn').addEventListener('click',()=>{ setStep(i); if(deskJ.matches) s.scrollIntoView({block:'center',behavior:reduce?'auto':'smooth'}); }));
-if ('IntersectionObserver' in window){
-  const jIO=new IntersectionObserver(es=>{ if(!deskJ.matches) return; es.forEach(e=>{ if(e.isIntersecting) setStep(steps.indexOf(e.target)); }); },{rootMargin:'-45% 0px -45% 0px'});
-  steps.forEach(s=>jIO.observe(s));
-}
 const cards=document.getElementById('jCards'), dots=[...document.querySelectorAll('#jDots button')], jPrev=document.querySelector('.j-nav .prev'), jNext=document.querySelector('.j-nav .next');
 let cardIdx=0;
 function cardTo(i){ const el=cards.children[i]; if(!el) return; cards.scrollTo({left:el.offsetLeft-cards.offsetLeft-parseFloat(getComputedStyle(cards).paddingLeft)+cards.scrollLeft*0, behavior:reduce?'auto':'smooth'}); }
 function cardState(){ const c=[...cards.children]; let best=0,bd=1e9; const left=cards.getBoundingClientRect().left+parseFloat(getComputedStyle(cards).paddingLeft);
   c.forEach((el,i)=>{ const d=Math.abs(el.getBoundingClientRect().left-left); if(d<bd){bd=d;best=i;} });
   if (cards.scrollLeft+cards.clientWidth>=cards.scrollWidth-4) best=c.length-1;
-  cardIdx=best; dots.forEach((d,i)=>{ d.classList.toggle('on',i===best); if(i===best) d.setAttribute('aria-current','true'); else d.removeAttribute('aria-current'); });
+  cardIdx=best; c.forEach((el,i)=>el.classList.toggle('on',i===best)); dots.forEach((d,i)=>{ d.classList.toggle('on',i===best); if(i===best) d.setAttribute('aria-current','true'); else d.removeAttribute('aria-current'); });
   jPrev.disabled=best===0; jNext.disabled=best===c.length-1; }
 cards.addEventListener('scroll',cardState,{passive:true}); cardState();
 dots.forEach((d,i)=>d.addEventListener('click',()=>cardTo(i)));
@@ -1113,7 +1209,7 @@ jPrev.addEventListener('click',()=>cardTo(Math.max(0,cardIdx-1))); jNext.addEven
 
 /* ================= PRICE ESTIMATE (sample rates from the prototype) ================= */
 const SVC={
-  press:{name:'Steam Press', note:'Priced per piece.', unit:'piece', items:[['Shirt',20,2],['T-shirt',20,0],['Jeans',25,0],['Trousers',25,2],['Saree',40,1],['Bedsheet',30,0]]},
+  press:{name:'Steam Press', note:'Priced per piece.', unit:'piece', items:[['Shirt',20,3],['T-shirt',20,0],['Jeans',25,2],['Trousers',25,0],['Saree',40,0],['Bedsheet',30,0]]},
   fold:{name:'Wash & Fold', note:'Priced by weight.', unit:'kg', items:[['Everyday clothes',40,3]]},
   dry:{name:'Dry Clean', note:'Priced per piece.', unit:'piece', items:[['Shirt',60,0],['Trousers',70,0],['Saree',120,0],['Blazer',180,1],['Suit, 2 piece',300,0]]},
   iron:{name:'Ironing', note:'Priced per piece.', unit:'piece', items:[['Shirt',15,4],['T-shirt',15,0],['Trousers',15,2],['Saree',30,0],['Bedsheet',20,0]]},
@@ -1124,7 +1220,7 @@ let svc='press';
 const PICKUP=10, FIRST_OFF=.2, firstEl=document.getElementById('firstOrder'), fineEl=document.getElementById('estFine'), billEl=document.getElementById('bill'); const itemsEl=document.getElementById('items'), totalEl=document.getElementById('estTotal'), countEl=document.getElementById('estCount'), noteEl=document.getElementById('estNote');
 function renderItems(){
   const d=SVC[svc]; noteEl.textContent=d.note;
-  itemsEl.innerHTML=d.items.map((it,i)=>'<li><div class="nm"><b>'+it[0]+'</b><span>₹'+it[1]+' / '+d.unit+'</span></div><div class="qty"><button class="minus" type="button" data-i="'+i+'" data-d="-1" aria-label="Fewer '+it[0]+'">−</button><output aria-label="'+it[0]+' quantity">'+it[2]+(d.unit==='kg'?' kg':'')+'</output><button class="plus" type="button" data-i="'+i+'" data-d="1" aria-label="More '+it[0]+'">+</button></div></li>').join('');
+  itemsEl.innerHTML=d.items.map((it,i)=>'<li style="--k:'+i+'"><div class="nm"><b>'+it[0]+'</b><span>₹'+it[1]+' / '+d.unit+'</span></div><div class="qty"><button class="minus" type="button" data-i="'+i+'" data-d="-1" aria-label="Fewer '+it[0]+'">−</button><output aria-live="off" aria-label="'+it[0]+' quantity">'+it[2]+(d.unit==='kg'?' kg':'')+'</output><button class="plus" type="button" data-i="'+i+'" data-d="1" aria-label="More '+it[0]+'">+</button></div></li>').join('');
   update(false);
 }
 function update(anim){
@@ -1132,7 +1228,7 @@ function update(anim){
   d.items.forEach(it=>{ total+=it[1]*it[2]; n+=it[2]; });
   itemsEl.querySelectorAll('li').forEach((li,i)=>{ li.querySelector('.minus').disabled=d.items[i][2]<=0; li.querySelector('.plus').disabled=d.items[i][2]>=20; });
   const first=firstEl.checked, off=first?Math.round(total*FIRST_OFF):0, grand = total>0 ? total+PICKUP-off : 0;
-  totalEl.textContent='₹'+grand;
+  totalEl.textContent='₹'+grand; document.getElementById('estBook').disabled = total===0; document.getElementById('estReply').hidden=true; // any change makes the old reply stale
   countEl.textContent=(d.unit==='kg'? n+' kg' : n+(n===1?' item':' items'))+' · '+d.name;
   const rows=d.items.filter(it=>it[2]>0).map(it=>'<dt>'+it[0]+(d.unit==='kg'?' · '+it[2]+' kg':' × '+it[2])+'</dt><dd>₹'+(it[1]*it[2])+'</dd>').join('');
   billEl.innerHTML = total>0 ? rows+'<span class="sep"></span><dt>Items</dt><dd>₹'+total+'</dd><dt>Pickup and delivery</dt><dd>₹'+PICKUP+'</dd>'+(first?'<dt>First order, 20% off items</dt><dd>−₹'+off+'</dd>':'')+'<span class="sep"></span><dt class="tot">You pay</dt><dd class="tot">₹'+grand+'</dd>' : '<dt>Add an item to see the total.</dt><dd></dd>';
@@ -1140,16 +1236,42 @@ function update(anim){
   if(anim && !reduce){ totalEl.classList.remove('pop'); void totalEl.offsetWidth; totalEl.classList.add('pop'); }
 }
 itemsEl.addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b||b.disabled) return; const it=SVC[svc].items[+b.dataset.i];
-  it[2]=Math.max(0,Math.min(20,it[2]+(+b.dataset.d))); b.parentElement.querySelector('output').textContent=it[2]+(SVC[svc].unit==='kg'?' kg':''); update(true); });
+  it[2]=Math.max(0,Math.min(20,it[2]+(+b.dataset.d))); const out=b.parentElement.querySelector('output'); out.textContent=it[2]+(SVC[svc].unit==='kg'?' kg':''); update(true);
+  if(!reduce) out.animate([{transform:'translateY('+(b.dataset.d>0?6:-6)+'px)',opacity:0},{transform:'none',opacity:1}],{duration:180,easing:EASE_OUT}); });
 const tabBtns=[...document.querySelectorAll('.tabs button')];
-function pickTab(t,focus){ svc=t.dataset.svc; tabBtns.forEach(x=>{ x.setAttribute('aria-selected',x===t); x.tabIndex = x===t?0:-1; }); if(focus) t.focus(); renderItems(); }
+const tabsEl=document.querySelector('.tabs'), tabsOn=tabsEl.cloneNode(true);
+tabsOn.className='tabs tabs-on'; tabsOn.inert=true; tabsOn.setAttribute('aria-hidden','true'); tabsOn.removeAttribute('role'); tabsOn.removeAttribute('aria-label');
+tabsOn.querySelectorAll('button').forEach(b=>{ b.removeAttribute('role'); b.removeAttribute('aria-selected'); });
+tabsEl.appendChild(tabsOn); tabsEl.classList.add('has-pill');
+function movePill(){ const t=tabBtns.find(b=>b.getAttribute('aria-selected')==='true'), W=tabsEl.clientWidth, H=tabsEl.clientHeight;
+  tabsOn.style.clipPath='inset('+t.offsetTop+'px '+(W-t.offsetLeft-t.offsetWidth)+'px '+(H-t.offsetTop-t.offsetHeight)+'px '+t.offsetLeft+'px round 999px)'; }
+movePill(); new ResizeObserver(movePill).observe(tabsEl);
+function pickTab(t,focus){ svc=t.dataset.svc; tabBtns.forEach(x=>{ x.setAttribute('aria-selected',x===t); x.tabIndex = x===t?0:-1; }); movePill(); if(focus) t.focus(); renderItems(); }
 tabBtns.forEach((t,i)=>{ t.addEventListener('click',()=>pickTab(t)); t.addEventListener('keydown',e=>{ if(e.key==='ArrowRight'||e.key==='ArrowLeft'){ e.preventDefault(); pickTab(tabBtns[(i+(e.key==='ArrowRight'?1:-1)+tabBtns.length)%tabBtns.length],true); } }); });
-document.getElementById('estNext').addEventListener('click',()=>{ setStep(2); const c=document.getElementById('jCards'); if(c.offsetParent && c.children[2]) setTimeout(()=>c.scrollTo({left:c.children[2].offsetLeft-c.offsetLeft-20,behavior:reduce?'auto':'smooth'}),400); });
+document.getElementById('estNext').addEventListener('click',()=>{ const c=document.getElementById('jCards'); if(c.offsetParent && c.children[2]) setTimeout(()=>c.scrollTo({left:c.children[2].offsetLeft-c.offsetLeft-20,behavior:reduce?'auto':'smooth'}),400); });
 renderItems();
 firstEl.addEventListener('change',()=>update(true));
 document.querySelectorAll('[data-est]').forEach(a=>a.addEventListener('click',()=>{ const t=tabBtns.find(b=>b.dataset.svc===a.dataset.est); if(t) pickTab(t); }));
 const slotLine=document.getElementById('slotLine');
-function slotText(){ const d=document.querySelector('input[name=pday]:checked'), w=document.querySelector('input[name=pwin]:checked'); slotLine.textContent='Pickup '+d.value+', '+w.value; }
+function slotText(){ const d=document.querySelector('input[name=pday]:checked'), w=document.querySelector('input[name=pwin]:checked'); slotLine.textContent='Pickup '+d.value+', '+w.value; document.getElementById('estReply').hidden=true; }
+/* estimate -> booking: hand the basket to Bubbles in the hero as one sentence, so the price flow ends in a booking */
+// shoes and curtains name no service word: their item nouns already pick the service, and "shoe"/"curtain" would be counted as one more item
+const SVC_WORD={press:'steam press',fold:'wash & fold',dry:'dry clean',iron:'ironing'}, WIN_WORD={'9 to 11 AM':'morning','1 to 3 PM':'afternoon','5 to 7 PM':'evening'};
+const SAY_AS={'Suit, 2 piece':'suit','Canvas shoes':'shoes','Sheer drape':'drape','Curtain panel':'curtain panel'};
+function estSentence(){ const d=SVC[svc], day=document.querySelector('input[name=pday]:checked').value, win=document.querySelector('input[name=pwin]:checked').value;
+  const items=d.items.filter(it=>it[2]>0).map(it=>{ const n=it[2]; if(d.unit==='kg') return n+' kg';
+    const base=SAY_AS[it[0]]||it[0].toLowerCase(); if(d.unit==='pair') return n+' pair'+(n>1?'s':'')+' of '+(/s$/.test(base)?base:base+'s');
+    return n+' '+(n===1||/s$/.test(base)?base:base+'s'); });
+  return [items.join(' and '), SVC_WORD[svc], day+' '+WIN_WORD[win]].filter(Boolean).join(', '); }
+// Bubbles answers right here, from the estimator's own numbers, so the first-order switch and slot are always respected
+const estReply=document.getElementById('estReply'); let estCheered=false;
+document.getElementById('estBook').addEventListener('click',()=>{ const d=SVC[svc];
+  document.getElementById('rHeard').textContent=estSentence();
+  document.getElementById('rSay').textContent='Done. '+d.name+': '+d.items.filter(it=>it[2]>0).map(it=>it[0]+(d.unit==='kg'?' · '+it[2]+' kg':' × '+it[2])).join(', ')+'. '+slotLine.textContent+'. You pay '+totalEl.textContent+'.';
+  // phones: the price bar is a slim sticky strip, so the reply goes under the pickup slot instead
+  const narrow=matchMedia('(max-width:899px)').matches, host=narrow?document.querySelector('.est-main'):document.querySelector('.est-side'); if(narrow) host.appendChild(estReply); else document.getElementById('estBook').after(estReply);
+  estReply.hidden=false; estReply.scrollIntoView({block:'nearest',behavior:reduce?'auto':'smooth'});
+  if(!reduce && !estCheered){ estCheered=true; const r=estReply.getBoundingClientRect(); for(let k=0;k<6;k++) bubble(estReply,r.width/2+(Math.random()-.5)*80,0,10+Math.random()*12,(Math.random()-.5)*36,60+Math.random()*50,1100+Math.random()*300,k*60,host.classList.contains('est-main')?'on-light':''); } });
 document.getElementById('slot').addEventListener('change',slotText); slotText();
 
 /* ================= TRACKER ================= */
@@ -1218,5 +1340,3 @@ addEventListener('load',onHeader);
 </script>
 </body>
 </html>
-
-</body></html>
